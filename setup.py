@@ -7,20 +7,18 @@ twitterframe
 import setuptools
 
 REQUIRED = [
-    "numpy",
+    "twitter",
+    "tweepy",
     "pandas",
-    "sklearn",
-    "seaborn",
-    "scipy",
-    "matplotlib.pyplot"
+    "sklearn"
 ]
 
 with open("README.md", "r") as fh:
     LONG_DESCRIPTION = fh.read()
 
 setuptools.setup(
-    name="lambdata-ruwai",
-    version="0.0.4",
+    name="twitterframe",
+    version="0.0.1",
     author="Ruwai",
     description="A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.",
     long_description=LONG_DESCRIPTION,
@@ -33,5 +31,4 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
-    ],
-)
+    ],)
