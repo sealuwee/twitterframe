@@ -4,6 +4,17 @@ Authorize your twitter credentials with this script
 Only runs if you credentials were not initialized on setup.
 '''
 
+##TODOs: Create some type of if statement that checks whether or not there is
+##       and valid keys in the config.py file
+##       We can try doing it by import config
+##       and call each key with config.consumer_key
+##       config.access_token, etc.
+##       AND if they are valid, **Meaning** they are actually strings
+##       Pass and move on to actually using twitterframe.
+##       I feel like this step is going to be the one step that defines
+##       The whole process of the project and the flow of how it will work.
+##       So MAKE IT WORK <3
+
 
 import config
 import tweepy
@@ -33,11 +44,12 @@ def check_auth():
     print('Step 6: Secret Consumer Key: ', end=' ')
     consumer_secret = input(twitter_emoji, "Secret Consumer Key : ")
 
-    # pass OAuth details to tweepy handler.
-    time.sleep(2)
+    return app_name, access_token, access_token_secret, consumer_key, consumer_secret
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+app_name, access_token, access_token_secret, consumer_key, consumer_secret = check_auth()
 
-    return access_token, access_token_secret, consumer_key, consumer_secret
+# pass OAuth details to tweepy handler.
+time.sleep(2)
 
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
