@@ -9,6 +9,7 @@ verify_ssl = true
 pandas = "*"
 twitter = "*"
 tweepy = "*"
+click = "*"
 
 [requires]
 python_version = "3.7"
