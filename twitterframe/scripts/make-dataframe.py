@@ -12,7 +12,6 @@ import csv
 twitter_emoji = config.twitter_emoji
 
 def get_tweets(username):
-
     '''
         Code redesigned from yanofsky:
         https://gist.github.com/yanofsky/5436496
@@ -32,7 +31,7 @@ def get_tweets(username):
 
     while len(new_tweets) > 0:
 
-        print(twitter_emoji, 'Getting tweets before %s' % (oldest_tweets))
+        print(twitter_emoji, 'Getting tweets before {}'.format(oldest_tweets))
 
         new_tweets = api.user_timeline(screen_name=username, count=200,max_id=oldest_tweets)
 
@@ -40,11 +39,11 @@ def get_tweets(username):
 
         oldest_tweets = tweets[-1].id - 1
 
-        print(twitter_emoji, '... %s Amount of tweets downloaded so far' % (len(tweets)))
+        print(twitter_emoji, '... {} Amount of tweets downloaded so far'.format(len(tweets)))
 
     output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
 
-    with open('%s_tweets.csv' % username, 'w') as tw:
+    with open('{}_tweets.csv'.format(username), 'w') as tw:
 
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text'])

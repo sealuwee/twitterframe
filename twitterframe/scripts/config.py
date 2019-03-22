@@ -16,58 +16,14 @@
 
 import tweepy
 
-twitter_emoji = bytes.decode(b'\xF0\x9F\x90\xA3','utf-8')
-
 access_token = "XxXxXxxXXXxxxxXXXxXX"
-access_token_secret = "xXXXXXXXXxxxxXxXXxxXxxXXxXxXxxxxXxXXxxxXXx"
+access_secret = "xXXXXXXXXxxxxXxXXxxXxxXXxXxXxxxxXxXXxxxXXx"
 consumer_key = "XXXXXXXX-xxXXxXXxxXxxxXxXXxXxXxXxxxXxxxxXxXXxXxxXX"
 consumer_secret = "XxXXXXXXXXxxxXXXxXXxXxXxxXXXXXxXxxXXXXx"
 
+twitter_emoji = bytes.decode(b'\xF0\x9F\x90\xA3','utf-8')
+
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth.set_access_token(access_token, access_secret)
 
 api = tweepy.API(auth)
-
-
-# class Configuration(object):
-
-#     def __init__(self):
-
-#         self.temp_folder_path = None
-#         self.username = ""
-#         self.app_name = ""
-#         self.access_token = {}
-#         self.access_token_secret = {}
-#         self.consumer_key = {}
-#         self.consumer_secret = {}
-
-#     def get_access_token(self):
-
-#         return
-
-#     def get_access_token_secret(self):
-
-#         return
-
-#     def get_consumer_key(self):
-
-#         return
-
-#     def get_consumer_secret(self):
-
-#         return
-
-#     def auth_settings(self):
-#         '''
-#         return: Auth settings information dictionary.
-#         '''
-#         return {
-
-#             'OAuthKeys':
-#                 {
-#                     'access_token': self.access_token,
-#                     'access_token_secret': self.access_token_secret,
-#                     'consumer_key': self.consumer_key,
-#                     'consumer_secret': self.consumer_secret,
-#                 }
-#         }

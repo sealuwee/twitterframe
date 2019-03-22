@@ -45,7 +45,7 @@ def check_auth():
     access_token = input(twitter_emoji, "Twitter API Access Token : ")
     print(twitter_emoji, '-------------------------')
     print('Step 4: Secret Access Token: ', end=' ')
-    access_token_secret = input(twitter_emoji, "Secret Access Token : ")
+    access_secret = input(twitter_emoji, "Secret Access Token : ")
     print(twitter_emoji, '-------------------------')
     print('Step 5: Consumer Key: ', end=' ')
     consumer_key = input(twitter_emoji, "Consumer Key : ")
@@ -53,27 +53,13 @@ def check_auth():
     print('Step 6: Secret Consumer Key: ', end=' ')
     consumer_secret = input(twitter_emoji, "Secret Consumer Key : ")
 
-    return app_name, access_token, access_token_secret, consumer_key, consumer_secret
+    return app_name, access_token, access_secret, consumer_key, consumer_secret
 
-# app_name, access_token, access_token_secret, consumer_key, consumer_secret = check_auth()
+# app_name, access_token, access_secret, consumer_key, consumer_secret = check_auth()
 
 # pass OAuth details to tweepy handler.
 
-def add_key(ndict, k, v):
-    '''
-    add_key: function to add keys if keys are not in instance.
-    ndict: a dictionary
-    k: key
-    v: value
-    '''
-
-    for key in ndict.keys():
-        if key==k:
-            ndict[key]=v
-        elif isinstance(ndict[key], dict):
-            add_key(ndict[key], k, v)
-
-path = "./kaggle.json"
+path = "./twitter_credentials.json"
 kaggle_config = json.loads(open(path).read())
 os.environ['KAGGLE_USERNAME'] = kaggle_config['username']
 os.environ['KAGGLE_KEY'] = kaggle_config['key']
@@ -98,20 +84,18 @@ def authen():
             '')) + os.sep + '.exit'
 
 
-
 def main():
 
     try:
 
         assert len(config.access_token) == 20
-        assert len(config.access_token_secret) == 42
+        assert len(config.access_secret) == 42
         assert len(config.consumer_key) == 50
         assert len(config.consumer_secret) == 39
 
     except ValueError:
 
         print('Please sign up for an')
-
 
 # time.sleep(2)
 
