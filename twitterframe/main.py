@@ -12,9 +12,15 @@ package.
 
 from scripts.twitter_auth import *
 from scripts.twitter_trends import *
-from
+from scripts.utils import *
 
 def main():
+
+    try:
+        print('Setting up API')
+        SetupAPI().check_auth()
+
+
 
     try:
 

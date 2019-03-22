@@ -7,14 +7,17 @@ Only runs if you credentials were not initialized on setup.
 # TODOs: SHOUTOUT TO COLE<3
 # update twitter emoji
 
-import config
+import utils
 import tweepy
 import time
 import json
 import os
 from pathlib import Path
 
-twitter_emoji = config.twitter_emoji
+b = utils.baby_chick
+party = utils.party
+wj = utils.will_jarvis
+h = utils.hatching_chick
 
 class SetupAPI(object):
 
@@ -66,22 +69,22 @@ def check_auth():
 
     # store OAuth credentials from input in command line.
 
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 1: Create account on https://developer.twitter.com')
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 2: What is the name of your app?: ', end=' ')
+    print(b, '-------------------------')
+    print(b, 'Step 1: Create account on https://developer.twitter.com')
+    print(b, '-------------------------')
+    print(b, 'Step 2: What is the name of your app?: ', end=' ')
     app_name = input()
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 3: Twitter API Access Token: ', end=' ')
+    print(b, '-------------------------')
+    print(b, 'Step 3: Twitter API Access Token: ', end=' ')
     access_token = input()
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 4: Secret Access Token: ', end=' ')
+    print(b, '-------------------------')
+    print(b, 'Step 4: Secret Access Token: ', end=' ')
     access_secret = input()
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 5: Consumer Key: ', end=' ')
+    print(b, '-------------------------')
+    print(b, 'Step 5: Consumer Key: ', end=' ')
     consumer_key = input()
-    print(twitter_emoji, '-------------------------')
-    print(twitter_emoji, 'Step 6: Secret Consumer Key: ', end=' ')
+    print(b, '-------------------------')
+    print(b, 'Step 6: Secret Consumer Key: ', end=' ')
     consumer_secret = input()
 
     return SetupAPI(app_name, access_token, access_secret, consumer_key, consumer_secret)
