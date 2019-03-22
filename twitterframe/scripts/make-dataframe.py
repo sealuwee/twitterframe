@@ -3,12 +3,10 @@ make-dataframe.py : this is the script that
                     constructs a dataframe from whatever script(s) is(are) called.
 '''
 
-from twitter import *
-
+import tweepy
 import config
-import sys
 import pandas
-import json
+import click
+import csv
 
-sys.path.append(".")
-
+twitter_emoji = config.twitter_emoji

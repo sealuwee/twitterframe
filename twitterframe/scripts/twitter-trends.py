@@ -2,8 +2,7 @@
 twitter-trends.py :
 '''
 
-from twitter import *
+import tweepy
 import config
-import sys
-sys.path.append(".")
+
 
