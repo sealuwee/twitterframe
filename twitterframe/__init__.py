@@ -1,9 +1,8 @@
 '''
-Ruwai's lambdata
+I hope this works.
 '''
 
-import pandas
-import numpy
-import scikit-learn
-import scipy
-import seaborn
+from main import start
+
+if __name__ == '__main__':
+    start()
