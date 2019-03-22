@@ -33,6 +33,24 @@ comment_re = re.compile(
 
 twitter_emoji = config.twitter_emoji
 
+# app_name, access_token, access_secret, consumer_key, consumer_secret = check_auth()
+
+# pass OAuth details to tweepy handler.
+
+class Authentication(object):
+
+    def __init__(self,
+                 app_name='',
+                 access_token='',
+                 access_secret='',
+                 consumer_key='',
+                 consumer_secret=''):
+        self.app_name = app_name
+        self.access_token = access_token
+        self.access_secret = access_secret
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+
 def check_auth():
 
     # store OAuth credentials from input in command line.
@@ -54,30 +72,25 @@ def check_auth():
     print('Step 6: Secret Consumer Key: ', end=' ')
     consumer_secret = input(twitter_emoji, "Secret Consumer Key : ")
 
-    return app_name, access_token, access_secret, consumer_key, consumer_secret
+    return Authentication(app_name, access_token, access_secret, consumer_key, consumer_secret)
 
-# app_name, access_token, access_secret, consumer_key, consumer_secret = check_auth()
+# tokens = [access_token, access_secret, consumer_key, consumer_secret]
 
-# pass OAuth details to tweepy handler.
+# path = Path("./twitter_credentials.json")
+# with path.open('w+') as tw:
+#     for i in tokens:
+#         tw.write('i\n')
 
-tokens = [access_token, access_secret, consumer_key, consumer_secret]
-
-path = Path("./twitter_credentials.json")
-with path.open('w+') as tw:
-    for i in tokens:
-        tw.write('i\n')
-
-config = json.loads(open(path).read())
-os.environ['ACCESS_TOKEN'] = config['access_token']
-os.environ['ACCESS_SECRET'] = config['access_secret']
-os.environ['CONSUMER_KEY'] = config['consumer_key']
-os.environ['CONSUMER_SECRET'] = config['consumer_secret']
+# config = json.loads(open(path).read())
+# os.environ['ACCESS_TOKEN'] = config['access_token']
+# os.environ['ACCESS_SECRET'] = config['access_secret']
+# os.environ['CONSUMER_KEY'] = config['consumer_key']
+# os.environ['CONSUMER_SECRET'] = config['consumer_secret']
 
 def authen():
     '''
     Authenticate Twitter OAuth tokens.
     '''
-
     twitter_creds = os.environ.get(
         'HOME',
         os.environ.get(
