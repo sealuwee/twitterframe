@@ -4,16 +4,7 @@ Authorize your twitter credentials with this script
 Only runs if you credentials were not initialized on setup.
 '''
 
-# TODOs:Create some type of if statement that checks whether or not there is
-#       and valid keys in the config.py file
-#       We can try doing it by import config
-#       and call each key with config.consumer_key
-#       config.access_token, etc.
-#       AND if they are valid, **Meaning** they are actually strings
-#       Pass and move on to actually using twitterframe.
-#       I feel like this step is going to be the one step that defines
-#       The whole process of the project and the flow of how it will work.
-#       So MAKE IT WORK <3
+# TODOs: SHOUTOUT TO COLE<3
 
 import config
 import tweepy

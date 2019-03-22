@@ -3,6 +3,16 @@ make-dataframe.py : this is the script that
                     constructs a dataframe from whatever script(s) is(are) called.
 '''
 
+# #
+
+#
+#
+#
+# ADD THIS FUNCTION TO TWITTER AUTH CLASS
+#
+#
+#
+
 import tweepy
 import config
 import pandas
