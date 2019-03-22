@@ -5,6 +5,7 @@ Only runs if you credentials were not initialized on setup.
 '''
 
 # TODOs: SHOUTOUT TO COLE<3
+# update twitter emoji
 
 import config
 import tweepy
@@ -39,7 +40,7 @@ class SetupAPI(object):
         }
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
-            print('its working')
+            print('Made file path as .json')
             filename = filename.joinpath(filename.parts[-1]+'.json')
         tw = open(filename.name, 'w+')
         tw.write(json.dumps(keys))
