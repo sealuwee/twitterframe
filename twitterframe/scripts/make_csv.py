@@ -12,6 +12,7 @@ import csv
 twitter_emoji = config.twitter_emoji
 
 def get_tweets(username):
+
     '''
         Code redesigned from yanofsky:
         https://gist.github.com/yanofsky/5436496

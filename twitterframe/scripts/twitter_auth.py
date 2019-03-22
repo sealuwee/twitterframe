@@ -4,40 +4,27 @@ Authorize your twitter credentials with this script
 Only runs if you credentials were not initialized on setup.
 '''
 
-##TODOs: Create some type of if statement that checks whether or not there is
-##       and valid keys in the config.py file
-##       We can try doing it by import config
-##       and call each key with config.consumer_key
-##       config.access_token, etc.
-##       AND if they are valid, **Meaning** they are actually strings
-##       Pass and move on to actually using twitterframe.
-##       I feel like this step is going to be the one step that defines
-##       The whole process of the project and the flow of how it will work.
-##       So MAKE IT WORK <3
-
+# TODOs:Create some type of if statement that checks whether or not there is
+#       and valid keys in the config.py file
+#       We can try doing it by import config
+#       and call each key with config.consumer_key
+#       config.access_token, etc.
+#       AND if they are valid, **Meaning** they are actually strings
+#       Pass and move on to actually using twitterframe.
+#       I feel like this step is going to be the one step that defines
+#       The whole process of the project and the flow of how it will work.
+#       So MAKE IT WORK <3
 
 import config
 import tweepy
 import time
 import json
 import os
-import os.path
-import re
 from pathlib import Path
-
-# Regular expression for comments in config file
-comment_re = re.compile(
-    '(^)[^\S\n]*/(?:\*(.*?)\*/[^\S\n]*|/[^\n]*)($)?',
-    re.DOTALL | re.MULTILINE
-)
 
 twitter_emoji = config.twitter_emoji
 
-# app_name, access_token, access_secret, consumer_key, consumer_secret = check_auth()
-
-# pass OAuth details to tweepy handler.
-
-class Authentication(object):
+class SetupAPI(object):
 
     def __init__(self,
                  app_name='',
@@ -51,41 +38,58 @@ class Authentication(object):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
 
+    def to_json(self,filename):
+
+        keys = {
+            'access_token': self.access_token,
+            'access_secret': self.access_secret,
+            'consumer_key': self.consumer_key,
+            'consumer_secret': self.consumer_secret
+        }
+        filename = Path(filename)
+        if '.json' not in filename.parts[-1]:
+            print('its working')
+            filename = filename.joinpath(filename.parts[-1]+'.json')
+        tw = open(filename.name, 'w+')
+        tw.write(json.dumps(keys))
+        tw.close()
+
+    def setup(self):
+
+        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth.set_access_token(self.access_token, self.access_secret)
+
+        api = tweepy.API(auth)
+
+        return api
+
+    def get_timeline(self):
+
+        '''
+        https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline
+        '''
+        return [tweet.text for tweet in self.setup().home_timeline()]
+
 def check_auth():
 
     # store OAuth credentials from input in command line.
-    print(twitter_emoji, '-------------------------')
-    print('Step 1: Create account on https://developer.twitter.com')
-    print(twitter_emoji, '-------------------------')
-    print('Step 2: What is the name of your app?: ', end=' ')
-    app_name = input(twitter_emoji, "App Name : ")
-    print(twitter_emoji, '-------------------------')
-    print('Step 3: Twitter API Access Token: ', end=' ')
-    access_token = input(twitter_emoji, "Twitter API Access Token : ")
-    print(twitter_emoji, '-------------------------')
-    print('Step 4: Secret Access Token: ', end=' ')
-    access_secret = input(twitter_emoji, "Secret Access Token : ")
-    print(twitter_emoji, '-------------------------')
-    print('Step 5: Consumer Key: ', end=' ')
-    consumer_key = input(twitter_emoji, "Consumer Key : ")
-    print(twitter_emoji, '-------------------------')
-    print('Step 6: Secret Consumer Key: ', end=' ')
-    consumer_secret = input(twitter_emoji, "Secret Consumer Key : ")
 
-    return Authentication(app_name, access_token, access_secret, consumer_key, consumer_secret)
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 1: Create account on https://developer.twitter.com')
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 2: What is the name of your app?: ', end=' ')
+    app_name = input()
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 3: Twitter API Access Token: ', end=' ')
+    access_token = input()
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 4: Secret Access Token: ', end=' ')
+    access_secret = input()
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 5: Consumer Key: ', end=' ')
+    consumer_key = input()
+    print(twitter_emoji, '-------------------------')
+    print(twitter_emoji, 'Step 6: Secret Consumer Key: ', end=' ')
+    consumer_secret = input()
 
-# tokens = [access_token, access_secret, consumer_key, consumer_secret]
-
-# path = Path("./twitter_credentials.json")
-# with path.open('w+') as tw:
-#     for i in tokens:
-#         tw.write('i\n')
-
-# config = json.loads(open(path).read())
-# os.environ['ACCESS_TOKEN'] = config['access_token']
-# os.environ['ACCESS_SECRET'] = config['access_secret']
-# os.environ['CONSUMER_KEY'] = config['consumer_key']
-# os.environ['CONSUMER_SECRET'] = config['consumer_secret']
-
-# time.sleep(2)
-
+    return SetupAPI(app_name, access_token, access_secret, consumer_key, consumer_secret)
