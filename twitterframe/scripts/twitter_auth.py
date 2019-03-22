@@ -60,18 +60,18 @@ def check_auth():
 
 # pass OAuth details to tweepy handler.
 
-path = "./twitter_credentials.json"
-kaggle_config = json.loads(open(path).read())
-os.environ['KAGGLE_USERNAME'] = kaggle_config['username']
-os.environ['KAGGLE_KEY'] = kaggle_config['key']
+tokens = [access_token, access_secret, consumer_key, consumer_secret]
 
-def init_config():
-    '''
-    Initialize config.
-    '''
+path = Path("./twitter_credentials.json")
+with path.open('w+') as tw:
+    for i in tokens:
+        tw.write('i\n')
 
-    config = os.path.dirname(__file__)
-    pass
+config = json.loads(open(path).read())
+os.environ['ACCESS_TOKEN'] = config['access_token']
+os.environ['ACCESS_SECRET'] = config['access_secret']
+os.environ['CONSUMER_KEY'] = config['consumer_key']
+os.environ['CONSUMER_SECRET'] = config['consumer_secret']
 
 def authen():
     '''
@@ -99,5 +99,3 @@ def main():
         print('Please sign up for an')
 
 # time.sleep(2)
-
-init_config()
