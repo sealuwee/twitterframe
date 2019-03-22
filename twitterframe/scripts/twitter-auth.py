@@ -69,17 +69,34 @@ def add_key(ndict, k, v):
 
     for key in ndict.keys():
         if key==k:
-            ndictp[key]=v
-        elif isintance(ndict[key], dict):
+            ndict[key]=v
+        elif isinstance(ndict[key], dict):
             add_key(ndict[key], k, v)
 
+path = "./kaggle.json"
+kaggle_config = json.loads(open(path).read())
+os.environ['KAGGLE_USERNAME'] = kaggle_config['username']
+os.environ['KAGGLE_KEY'] = kaggle_config['key']
 
 def init_config():
     '''
     Initialize config.
     '''
 
-    config = os.path.dirname(__file__) + \
+    config = os.path.dirname(__file__)
+    pass
+
+def authen():
+    '''
+    Authenticate Twitter OAuth tokens.
+    '''
+
+    twitter_creds = os.environ.get(
+        'HOME',
+        os.environ.get(
+            'USERPROFILE',
+            '')) + os.sep + '.exit'
+
 
 
 def main():
