@@ -3,7 +3,10 @@ twitter-trends.py :
 '''
 
 import tweepy
-import config
+import json
+import utils
 
-twitter_emoji = config.twitter_emoji
-
+b = utils.baby_chick
+party = utils.party
+wj = utils.will_jarvis
+h = utils.hatching_chick

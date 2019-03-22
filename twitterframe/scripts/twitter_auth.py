@@ -9,9 +9,7 @@ Only runs if you credentials were not initialized on setup.
 
 import utils
 import tweepy
-import time
 import json
-import os
 from pathlib import Path
 
 b = utils.baby_chick
@@ -33,7 +31,7 @@ class SetupAPI(object):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
 
-    def to_json(self,filename):
+    def to_json(self, filename):
 
         keys = {
             'access_token': self.access_token,
@@ -41,6 +39,7 @@ class SetupAPI(object):
             'consumer_key': self.consumer_key,
             'consumer_secret': self.consumer_secret
         }
+
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
             print('Made file path as .json')
