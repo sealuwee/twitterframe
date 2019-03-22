@@ -87,28 +87,5 @@ def check_auth():
 # os.environ['CONSUMER_KEY'] = config['consumer_key']
 # os.environ['CONSUMER_SECRET'] = config['consumer_secret']
 
-def authen():
-    '''
-    Authenticate Twitter OAuth tokens.
-    '''
-    twitter_creds = os.environ.get(
-        'HOME',
-        os.environ.get(
-            'USERPROFILE',
-            '')) + os.sep + '.exit'
-
-
-def main():
-
-    try:
-
-        assert len(config.access_token) == 20
-        assert len(config.access_secret) == 42
-        assert len(config.consumer_key) == 50
-        assert len(config.consumer_secret) == 39
-
-    except ValueError:
-
-        print('Please sign up for an')
-
 # time.sleep(2)
+
