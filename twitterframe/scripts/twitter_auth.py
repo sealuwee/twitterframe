@@ -23,6 +23,7 @@ import json
 import os
 import os.path
 import re
+from pathlib import Path
 
 # Regular expression for comments in config file
 comment_re = re.compile(
