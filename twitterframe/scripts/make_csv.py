@@ -41,7 +41,7 @@ def get_tweets(username):
     while len(new_tweets) > 0:
 
         print(twitter_emoji, 'Getting tweets before {}'.format(oldest_tweets))
-        
+
         new_tweets = api.user_timeline(screen_name=username, count=200,max_id=oldest_tweets)
 
         tweets.extend(new_tweets)
@@ -60,4 +60,3 @@ def get_tweets(username):
 
     pass
 
-    

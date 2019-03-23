@@ -7,15 +7,15 @@ Only runs if you credentials were not initialized on setup.
 # TODOs: SHOUTOUT TO COLE<3
 # update twitter emoji
 
-import utils
+from scripts.utils import *
 import tweepy
 import json
 from pathlib import Path
 
-b = utils.baby_chick
-p = utils.party
-wj = utils.will_jarvis
-h = utils.hatching_chick
+b = baby_chick
+p = party
+wj = will_jarvis
+h = hatching_chick
 
 class SetupAPI(object):
 
@@ -39,19 +39,6 @@ class SetupAPI(object):
             'consumer_key': self.consumer_key,
             'consumer_secret': self.consumer_secret
         }
-        print(wj,'What would you like your filename to be to store your Twitter credentials?',wj)
-        filename=input()
-
-        if filename == None:
-            try:
-                print('Please specify a valid name for the keys file.')
-                filename=input()
-            except:
-                print('So what about the last message did you not understand.')
-
-        elif:
-            continue
-
         
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
@@ -78,22 +65,22 @@ class SetupAPI(object):
 
 def check_auth():
     # store OAuth credentials from input in command line.
-    print(b, '-------------------------')
-    print(b, 'Step 1: Create account on https://developer.twitter.com')
-    print(b, '-------------------------')
-    print(b, 'Step 2: What is the name of your app?: ', end=' ')
+    print(h, '-------------------------')
+    print(h, 'Step 1: Create account on https://developer.twitter.com')
+    print(h, '-------------------------')
+    print(h, 'Step 2: What is the name of your app?: ', end=' ')
     app_name = input()
-    print(b, '-------------------------')
-    print(b, 'Step 3: Twitter API Access Token: ', end=' ')
+    print(h, '-------------------------')
+    print(h, 'Step 3: Twitter API Access Token: ', end=' ')
     access_token = input()
-    print(b, '-------------------------')
-    print(b, 'Step 4: Secret Access Token: ', end=' ')
+    print(h, '-------------------------')
+    print(h, 'Step 4: Secret Access Token: ', end=' ')
     access_secret = input()
-    print(b, '-------------------------')
-    print(b, 'Step 5: Consumer Key: ', end=' ')
+    print(h, '-------------------------')
+    print(h, 'Step 5: Consumer Key: ', end=' ')
     consumer_key = input()
-    print(b, '-------------------------')
-    print(b, 'Step 6: Secret Consumer Key: ', end=' ')
+    print(h, '-------------------------')
+    print(h, 'Step 6: Secret Consumer Key: ', end=' ')
     consumer_secret = input()
 
     return SetupAPI(app_name, access_token, access_secret, consumer_key, consumer_secret)

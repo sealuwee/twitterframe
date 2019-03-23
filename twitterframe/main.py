@@ -17,38 +17,58 @@ package.
 
 import scripts.twitter_auth as auth 
 import scripts.utils as utils
+import click
 
 h = utils.hatching_chick
 b = utils.baby_chick
 p = utils.party
-
-print(h)
-print(b)
+wj = utils.will_jarvis
 
 def main():
 
+    api = auth.SetupAPI()
+
+
+    print(h,'Setting up API...',h)
+    auth.check_auth()
+    print(b,'API is almost setup',b)
+    print(b,'JSON file needs to be created to store your API keys', b)
+    print(b,'When prompted to, please specify a filename.',b)
+    #add input for filename...
+    print(wj,'Filename to store Twitter credentials: ', end=' ')
+    filename=input()
+
+    if filename == None:
+        print(wj, 'Please specify a valid name for the keys file. ')
+        print(wj,'Filename to store Twitter credentials: ', end=' ')
+        filename=input()
+
+    else:
+        pass
+
+    api.to_json(filename)
+    print(p*20)
+    print(b,'API Keys have been stored!',b)
+    print(b,'API is ready to be used!',b)
+    print(b,'twitterframe -h to see all commands and arguments.',b)
+    print(b,'Thank you for using twitterframe, and big thanks to my contributors',b)
+    print(h,'--->',b,'--->',wj)
+    print(p*20)
+
+    #After this line, we can either print all of the helper methods
+    #Or we can show an example of how to get started with using
+    #twitterframe from the commandline.
+
     try:
-        print(h,'Setting up API...',h)
-        auth.check_auth()
-        print(p*20)
-        print(b,'API is almost setup',b)
-        print(b,'JSON file needs to be created to store your API keys', b)
-        print(b,'When prompted to, please specify a filename.',b)
-        #add so
-        print(p*20)
-        #After this line, we can either print all of the helper methods
-        #Or we can show an example of how to get started with using
-        #twitterframe from the commandline.
-    except ValueError:
 
-        print('Error has been raised.')
-
-    try:
-
-        assert len(config.access_token) == 20
-        assert len(config.access_secret) == 42
-        assert len(config.consumer_key) == 50
-        assert len(config.consumer_secret) == 39
+        assert len(api.access_token) != None
+        assert len(api.access_secret) != None
+        assert len(api.consumer_key) != None
+        assert len(api.consumer_secret) != None    
+        # assert len(api.access_token) == 20
+        # assert len(api.access_secret) == 42
+        # assert len(api.consumer_key) == 50
+        # assert len(api.consumer_secret) == 39    
 
     except ValueError:
 
