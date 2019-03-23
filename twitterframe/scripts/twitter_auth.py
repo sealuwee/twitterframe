@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 b = utils.baby_chick
-party = utils.party
+p = utils.party
 wj = utils.will_jarvis
 h = utils.hatching_chick
 
@@ -52,22 +52,19 @@ class SetupAPI(object):
 
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_secret)
-
+        
         api = tweepy.API(auth)
 
         return api
 
     def get_timeline(self):
-
         '''
         https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
 def check_auth():
-
     # store OAuth credentials from input in command line.
-
     print(b, '-------------------------')
     print(b, 'Step 1: Create account on https://developer.twitter.com')
     print(b, '-------------------------')
