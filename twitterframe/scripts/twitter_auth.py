@@ -31,7 +31,7 @@ class SetupAPI(object):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
 
-    def to_json(self, filename):
+    def to_json(self, filename=''):
 
         keys = {
             'access_token': self.access_token,
@@ -39,7 +39,20 @@ class SetupAPI(object):
             'consumer_key': self.consumer_key,
             'consumer_secret': self.consumer_secret
         }
+        print(wj,'What would you like your filename to be to store your Twitter credentials?',wj)
+        filename=input()
 
+        if filename == None:
+            try:
+                print('Please specify a valid name for the keys file.')
+                filename=input()
+            except:
+                print('So what about the last message did you not understand.')
+
+        elif:
+            continue
+
+        
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
             print('Made file path as .json')

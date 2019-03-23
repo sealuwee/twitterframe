@@ -10,13 +10,17 @@ package.
 # start working on click commands and groups
 # add asserts trys and exceptions to this file
 
-from scripts.twitter_auth import *
-from scripts.twitter_trends import *
-from scripts.utils import *
+# TODOs for the MVP?
+# start with basic click commands
+# click is the argparser making command line 
+# interactions very easy to understand.
 
-h = hatching_chick
-b = baby_chick
+import scripts.twitter_auth as auth 
+import scripts.utils as utils
 
+h = utils.hatching_chick
+b = utils.baby_chick
+p = utils.party
 
 print(h)
 print(b)
@@ -24,9 +28,17 @@ print(b)
 def main():
 
     try:
-        print(h,'Setting up API')
-        SetupAPI().check_auth()
-
+        print(h,'Setting up API...',h)
+        auth.check_auth()
+        print(p*20)
+        print(b,'API is almost setup',b)
+        print(b,'JSON file needs to be created to store your API keys', b)
+        print(b,'When prompted to, please specify a filename.',b)
+        #add so
+        print(p*20)
+        #After this line, we can either print all of the helper methods
+        #Or we can show an example of how to get started with using
+        #twitterframe from the commandline.
     except ValueError:
 
         print('Error has been raised.')
