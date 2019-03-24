@@ -1,13 +1,12 @@
 """
 twitterframe
 - a command line application to create dataframes from Twitter data.
-- must have Twitter developer keys.
+- Must have Twitter developer keys to use.
 """
 
 import setuptools
 
 REQUIRED = [
-    "twitter",
     "tweepy",
     "pandas",
     "click"
@@ -37,7 +36,7 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        twitterframe=twitterframe.scripts.cli:cli
+        twitterframe=twitterframe.main:main
     ''',
 
     )

@@ -12,10 +12,11 @@ package.
 
 # TODOs for the MVP?
 # start with basic click commands
-# click is the argparser making command line 
+# click is the argparser making command line
 # interactions very easy to understand.
+# so basically we want to be making commands now.
 
-import scripts.twitter_auth as auth 
+import scripts.twitter_auth as auth
 import scripts.utils as utils
 import click
 
@@ -64,11 +65,11 @@ def main():
         assert len(api.access_token) != None
         assert len(api.access_secret) != None
         assert len(api.consumer_key) != None
-        assert len(api.consumer_secret) != None    
+        assert len(api.consumer_secret) != None
         # assert len(api.access_token) == 20
         # assert len(api.access_secret) == 42
         # assert len(api.consumer_key) == 50
-        # assert len(api.consumer_secret) == 39    
+        # assert len(api.consumer_secret) == 39
 
     except ValueError:
 
