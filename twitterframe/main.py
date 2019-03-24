@@ -19,14 +19,15 @@ package.
 # replace all click.echo in EVERY SCRIPT that uses CLICK with click.echo
 
 
-import scripts.twitter_auth as auth
-import scripts.utils as utils
+import twitterframe.scripts.twitter_auth as auth
+import twitterframe.scripts.utils as utils
 import click
 
 h = utils.hatching_chick
 b = utils.baby_chick
 p = utils.party
 pidgeon = utils.pidgeon
+
 
 #create SetupAPI object to pass for commands?
 
@@ -43,11 +44,33 @@ def cli():
 @cli.command()
 @click.option('-edit', default=None,
               help='Option to edit the keys in your file.')
-@click.argument('filename', type=click.Path('w'),
-                default='twitter_credentials.json',
-                required=False, help='Specify a filename for your Twitter credentials.')
-def auth(setup):
-    auth.check_auth()
+@click.argument('file')
+def setup(edit, file):
+
+    try:
+        click.echo(b, 'Setting up API...',b)
+        auth.check_auth()
+        click.echo(b, 'API is almost setup',b)
+        click.echo(b, 'JSON file needs to be created to store your API keys', b)
+        click.echo(b, 'When prompted to, please specify a filename.', b)
+        click.echo(b, 'Type the following command in the command line if a prompt does not show up.', b)
+        click.echo(b, '>>> twitterframe -n creds <<<', b)
+        click.echo(b, 'sans the emojis.', b)
+        filename=click.prompt()
+
+        if filename == None:
+            click.echo(b, 'Please specify a valid name for the keys file. ')
+            filename=click.prompt(b,'Filename to store Twitter credentials: ')
+
+        api.to_json(filename)
+
+        click.echo(p*25)
+        click.echo(pidgeon,'API Keys have been stored!',pidgeon)
+        click.echo(pidgeon,'API is ready to be used!',pidgeon)
+        click.echo(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
+        click.echo(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
+        click.echo(h,'--->',b,'--->',pidgeon)
+        click.echo(p*25)
 
 # def main():
 
@@ -78,9 +101,9 @@ def auth(setup):
 #     click.echo(h,'--->',b,'--->',pidgeon)
 #     click.echo(p*25)
 
-#     #After this line, we can either click.echo all of the helper methods
-#     #Or we can show an example of how to get started with using
-#     #twitterframe from the commandline.
+    #After this line, we can either click.echo all of the helper methods
+    #Or we can show an example of how to get started with using
+    #twitterframe from the commandline.
 
 #     try:
 
