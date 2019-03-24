@@ -21,12 +21,10 @@ h = hatching_chick
 class SetupAPI(object):
 
     def __init__(self,
-                 app_name='',
                  access_token='',
                  access_secret='',
                  consumer_key='',
                  consumer_secret=''):
-        self.app_name = app_name
         self.access_token = access_token
         self.access_secret = access_secret
         self.consumer_key = consumer_key
@@ -65,23 +63,23 @@ class SetupAPI(object):
         return [tweet.text for tweet in self.setup().home_timeline()]
 
 def check_auth():
+    '''
+    I hope this works
+    '''
     # store OAuth credentials from input in command line.
     click.echo(h, '-------------------------')
-    click.echo(h, 'Step 1: Create account on https://developer.twitter.com')
+    click.echo(h, 'Step 1: Create an account on https://developer.twitter.com')
     click.echo(h, '-------------------------')
-    click.echo(h, 'Step 2: What is the name of your app?: ', end=' ')
-    app_name = input()
-    click.echo(h, '-------------------------')
-    click.echo(h, 'Step 3: Twitter API Access Token: ', end=' ')
+    click.echo(h, 'Step 2: Twitter API Access Token: ', end=' ')
     access_token = input()
     click.echo(h, '-------------------------')
-    click.echo(h, 'Step 4: Secret Access Token: ', end=' ')
+    click.echo(h, 'Step 3: Secret Access Token: ', end=' ')
     access_secret = input()
     click.echo(h, '-------------------------')
-    click.echo(h, 'Step 5: Consumer Key: ', end=' ')
+    click.echo(h, 'Step 4: Consumer Key: ', end=' ')
     consumer_key = input()
     click.echo(h, '-------------------------')
-    click.echo(h, 'Step 6: Secret Consumer Key: ', end=' ')
+    click.echo(h, 'Step 5: Secret Consumer Key: ', end=' ')
     consumer_secret = input()
 
-    return SetupAPI(app_name, access_token, access_secret, consumer_key, consumer_secret)
+    return SetupAPI(access_token, access_secret, consumer_key, consumer_secret)
