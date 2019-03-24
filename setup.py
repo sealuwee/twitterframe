@@ -36,7 +36,7 @@ setuptools.setup(
     ],
     entry_points='''
         [console_scripts]
-        twitterframe=twitterframe.main:main
+        twitterframe=twitterframe.main:cli
     ''',
 
     )

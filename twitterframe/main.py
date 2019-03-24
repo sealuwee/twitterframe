@@ -28,6 +28,11 @@ b = utils.baby_chick
 p = utils.party
 pidgeon = utils.pidgeon
 
+#create SetupAPI object to pass for commands?
+
+api = auth.SetupAPI()
+
+
 @click.group()
 def cli():
     '''
@@ -36,18 +41,17 @@ def cli():
     '''
     pass
 
-@click.command()
-@click.argument('setup', type=click.File('w+'),
+@cli.command()
+@click.option('-edit', default=None,
+              help='Option to edit the keys in your file.')
+@click.argument('filename', type=click.Path('w'),
                 default='twitter_credentials.json',
-                required=False)
+                required=False, help='Specify a filename for your Twitter credentials.')
 def auth(setup):
-    api = auth.SetupAPI()
     auth.check_auth()
-    pass
 
 def main():
 
-    api = auth.SetupAPI()
 
     click.echo(b, 'Setting up API...',b)
     auth.check_auth()
