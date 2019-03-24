@@ -39,7 +39,7 @@ def cli():
 @click.command()
 @click.argument('setup', type=click.File('w+'),
                 default='twitter_credentials.json',
-                required=True)
+                required=False)
 def auth(setup):
     api = auth.SetupAPI()
     auth.check_auth()
