@@ -27,6 +27,7 @@ h = utils.hatching_chick
 b = utils.baby_chick
 p = utils.party
 pidgeon = utils.pidgeon
+w = utils.warning
 
 
 #create SetupAPI object to pass for commands?
