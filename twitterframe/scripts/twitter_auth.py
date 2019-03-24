@@ -17,6 +17,7 @@ b = baby_chick
 p = party
 pidgeon = pidgeon
 h = hatching_chick
+check = checkmark
 
 class SetupAPI(object):
 
@@ -41,7 +42,7 @@ class SetupAPI(object):
 
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
-            print(b, 'Made file path as .json')
+            print(check, 'Made file path as .json')
             filename = filename.joinpath(filename.parts[-1]+'.json')
         tw = open(filename.name, 'w+')
         tw.write(json.dumps(keys))
