@@ -32,7 +32,6 @@ pidgeon = utils.pidgeon
 
 api = auth.SetupAPI()
 
-
 @click.group()
 def cli():
     '''
@@ -50,51 +49,51 @@ def cli():
 def auth(setup):
     auth.check_auth()
 
-def main():
+# def main():
 
 
-    click.echo(b, 'Setting up API...',b)
-    auth.check_auth()
-    click.echo(b, 'API is almost setup',b)
-    click.echo(b, 'JSON file needs to be created to store your API keys', b)
-    click.echo(b, 'When prompted to, please specify a filename.', b)
-    #add input for filename...
-    click.echo(b, 'Filename to store Twitter credentials: ', end=' ')
-    filename=input()
+#     click.echo(b, 'Setting up API...',b)
+#     auth.check_auth()
+#     click.echo(b, 'API is almost setup',b)
+#     click.echo(b, 'JSON file needs to be created to store your API keys', b)
+#     click.echo(b, 'When prompted to, please specify a filename.', b)
+#     #add input for filename...
+#     click.echo(b, 'Filename to store Twitter credentials: ', end=' ')
+#     filename=input()
 
-    if filename == None:
-        click.echo(b, 'Please specify a valid name for the keys file. ')
-        click.echo(b,'Filename to store Twitter credentials: ', end=' ')
-        filename=input()
+#     if filename == None:
+#         click.echo(b, 'Please specify a valid name for the keys file. ')
+#         click.echo(b,'Filename to store Twitter credentials: ', end=' ')
+#         filename=input()
 
-    else:
-        pass
+#     else:
+#         pass
 
-    api.to_json(filename)
-    click.echo(p*25)
-    click.echo(pidgeon,'API Keys have been stored!',pidgeon)
-    click.echo(pidgeon,'API is ready to be used!',pidgeon)
-    click.echo(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
-    click.echo(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
-    click.echo(h,'--->',b,'--->',pidgeon)
-    click.echo(p*25)
+#     api.to_json(filename)
+#     click.echo(p*25)
+#     click.echo(pidgeon,'API Keys have been stored!',pidgeon)
+#     click.echo(pidgeon,'API is ready to be used!',pidgeon)
+#     click.echo(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
+#     click.echo(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
+#     click.echo(h,'--->',b,'--->',pidgeon)
+#     click.echo(p*25)
 
-    #After this line, we can either click.echo all of the helper methods
-    #Or we can show an example of how to get started with using
-    #twitterframe from the commandline.
+#     #After this line, we can either click.echo all of the helper methods
+#     #Or we can show an example of how to get started with using
+#     #twitterframe from the commandline.
 
-    try:
+#     try:
 
-        assert len(api.access_token) != None
-        assert len(api.access_secret) != None
-        assert len(api.consumer_key) != None
-        assert len(api.consumer_secret) != None
-        # assert len(api.access_token) == 20
-        # assert len(api.access_secret) == 42
-        # assert len(api.consumer_key) == 50
-        # assert len(api.consumer_secret) == 39
+#         assert len(api.access_token) != None
+#         assert len(api.access_secret) != None
+#         assert len(api.consumer_key) != None
+#         assert len(api.consumer_secret) != None
+#         # assert len(api.access_token) == 20
+#         # assert len(api.access_secret) == 42
+#         # assert len(api.consumer_key) == 50
+#         # assert len(api.consumer_secret) == 39
 
-    except ValueError:
+#     except ValueError:
 
-        click.echo('Please sign up for a Twitter developer account.')
+#         click.echo('Please sign up for a Twitter developer account.')
 

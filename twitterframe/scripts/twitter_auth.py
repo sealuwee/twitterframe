@@ -7,7 +7,7 @@ Only runs if you credentials were not initialized on setup.
 # TODOs: SHOUTOUT TO COLE<3
 # update twitter emoji
 
-from scripts.utils import *
+from utils import *
 import tweepy
 import json
 import click
