@@ -26,39 +26,38 @@ import click
 h = utils.hatching_chick
 b = utils.baby_chick
 p = utils.party
-wj = utils.will_jarvis
+pidgeon = utils.pidgeon
 
 
 def main():
 
     api = auth.SetupAPI()
 
-
-    print(h,'Setting up API...',h)
+    print(b, 'Setting up API...',b)
     auth.check_auth()
-    print(b,'API is almost setup',b)
-    print(b,'JSON file needs to be created to store your API keys', b)
-    print(b,'When prompted to, please specify a filename.',b)
+    print(b, 'API is almost setup',b)
+    print(b, 'JSON file needs to be created to store your API keys', b)
+    print(b, 'When prompted to, please specify a filename.', b)
     #add input for filename...
-    print(wj,'Filename to store Twitter credentials: ', end=' ')
+    print(b, 'Filename to store Twitter credentials: ', end=' ')
     filename=input()
 
     if filename == None:
-        print(wj, 'Please specify a valid name for the keys file. ')
-        print(wj,'Filename to store Twitter credentials: ', end=' ')
+        print(b, 'Please specify a valid name for the keys file. ')
+        print(b,'Filename to store Twitter credentials: ', end=' ')
         filename=input()
 
     else:
         pass
 
     api.to_json(filename)
-    print(p*20)
-    print(b,'API Keys have been stored!',b)
-    print(b,'API is ready to be used!',b)
-    print(b,'twitterframe -h to see all commands and arguments.',b)
-    print(b,'Thank you for using twitterframe, and big thanks to my contributors',b)
-    print(h,'--->',b,'--->',wj)
-    print(p*20)
+    print(p*25)
+    print(pidgeon,'API Keys have been stored!',pidgeon)
+    print(pidgeon,'API is ready to be used!',pidgeon)
+    print(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
+    print(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
+    print(h,'--->',b,'--->',pidgeon)
+    print(p*25)
 
     #After this line, we can either print all of the helper methods
     #Or we can show an example of how to get started with using

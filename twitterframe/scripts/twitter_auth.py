@@ -14,7 +14,7 @@ from pathlib import Path
 
 b = baby_chick
 p = party
-wj = will_jarvis
+pidgeon = pidgeon
 h = hatching_chick
 
 class SetupAPI(object):
@@ -39,10 +39,10 @@ class SetupAPI(object):
             'consumer_key': self.consumer_key,
             'consumer_secret': self.consumer_secret
         }
-        
+
         filename = Path(filename)
         if '.json' not in filename.parts[-1]:
-            print('Made file path as .json')
+            print(b, 'Made file path as .json')
             filename = filename.joinpath(filename.parts[-1]+'.json')
         tw = open(filename.name, 'w+')
         tw.write(json.dumps(keys))
@@ -52,7 +52,7 @@ class SetupAPI(object):
 
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_secret)
-        
+
         api = tweepy.API(auth)
 
         return api
