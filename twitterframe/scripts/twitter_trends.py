@@ -2,9 +2,12 @@
 twitter-trends.py :
 '''
 
+
+import twitterframe.scripts.twitter_auth as auth
+import twitterframe.scripts.utils as utils
 import tweepy
 import json
-import utils
+
 
 b = utils.baby_chick
 party = utils.party

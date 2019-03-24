@@ -2,19 +2,6 @@
 I believe I will be storing all of my commands here, and will be used to initialize the
 package.
 '''
-# TODOS: start importing scripts
-# create new classes for things i guess
-# go to bed early haha jk
-# don't play videogames
-# use twitter more often lol
-# start working on click commands and groups
-# add asserts trys and exceptions to this file
-
-# TODOs for the MVP?
-# start with basic click commands
-# click is the argparser making command line
-# interactions very easy to understand.
-# so basically we want to be making commands now.
 
 # replace all print in EVERY SCRIPT that uses CLICK with print
 # TODOs...
@@ -27,6 +14,7 @@ package.
 import twitterframe.scripts.twitter_auth as auth
 import twitterframe.scripts.utils as utils
 import click
+import tweepy
 
 # emojis go here
 h = utils.hatching_chick
@@ -97,50 +85,3 @@ def setup(edit, file):
     print(h,'--->',b,'--->',pidgeon)
     print(p*25)
 
-# def main():
-
-
-#     print(b, 'Setting up API...',b)
-#     auth.check_auth()
-#     print(b, 'API is almost setup',b)
-#     print(b, 'JSON file needs to be created to store your API keys', b)
-#     print(b, 'When prompted to, please specify a filename.', b)
-#     #add input for filename...
-#     print(b, 'Filename to store Twitter credentials: ', end=' ')
-#     filename=input()
-
-#     if filename == None:
-#         print(b, 'Please specify a valid name for the keys file. ')
-#         print(b,'Filename to store Twitter credentials: ', end=' ')
-#         filename=input()
-
-#     else:
-#         pass
-
-#     api.to_json(filename)
-#     print(p*25)
-#     print(pidgeon,'API Keys have been stored!',pidgeon)
-#     print(pidgeon,'API is ready to be used!',pidgeon)
-#     print(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
-#     print(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
-#     print(h,'--->',b,'--->',pidgeon)
-#     print(p*25)
-
-#     After this line, we can either print all of the helper methods
-#     Or we can show an example of how to get started with using
-#     twitterframe from the commandline.
-
-#     try:
-
-#         assert len(api.access_token) != None
-#         assert len(api.access_secret) != None
-#         assert len(api.consumer_key) != None
-#         assert len(api.consumer_secret) != None
-#         # assert len(api.access_token) == 20
-#         # assert len(api.access_secret) == 42
-#         # assert len(api.consumer_key) == 50
-#         # assert len(api.consumer_secret) == 39
-
-#     except ValueError:
-
-#         print('Please sign up for a Twitter developer account.')

@@ -11,10 +11,11 @@ make-dataframe.py : this is the script that
 #
 #
 
+
+import twitterframe.scripts.twitter_auth as auth
+import twitterframe.scripts.utils as utils
 import tweepy
 import config
-import pandas
-import click
 import csv
 
 twitter_emoji = config.twitter_emoji
@@ -28,7 +29,8 @@ def get_tweets(username):
         https://gist.github.com/gabrielsoule/638201ac0cc12828d3cde69035a25336
     '''
 
-    api = config.api
+    api = auth.SetupAPI()
+
 
     tweets = []
 
