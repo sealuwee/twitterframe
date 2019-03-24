@@ -7,10 +7,8 @@ verify_ssl = true
 
 [packages]
 pandas = "*"
-twitter = "*"
 tweepy = "*"
 click = "*"
-pickle = "*"
 python-dotenv = "*"
 
 [requires]
