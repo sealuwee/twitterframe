@@ -16,6 +16,9 @@ package.
 # interactions very easy to understand.
 # so basically we want to be making commands now.
 
+# replace all PRINT in EVERY SCRIPT that uses CLICK with click.echo
+
+
 import scripts.twitter_auth as auth
 import scripts.utils as utils
 import click
@@ -24,6 +27,7 @@ h = utils.hatching_chick
 b = utils.baby_chick
 p = utils.party
 wj = utils.will_jarvis
+
 
 def main():
 
