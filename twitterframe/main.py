@@ -136,8 +136,7 @@ def reconfigure():
 #               help='Specify a user to scrape.')
 # @click.option('--out', default='tweets.csv',
 #               help='Specify filename for csv.')
-@click.argument('username', required=True,
-                )
+@click.argument('username', required=True)
 def scrape(username):
     '''
     Scrape tweets from a specified user and dump into a .csv file.
