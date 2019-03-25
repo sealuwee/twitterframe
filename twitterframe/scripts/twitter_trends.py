@@ -3,12 +3,12 @@ twitter-trends.py : uh
 '''
 #
 
-from twitterframe.scripts.twitter_auth import SetupAPI
 import twitterframe.scripts.utils as utils
 import tweepy
 import json
 import csv
 import click
+from pathlib import Path
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -17,7 +17,7 @@ pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
 
-class TwitterMethods(SetupAPI):
+class TwitterMethods(object):
     '''
     subclass of SetupAPI
     TwitterTrends class.
@@ -32,6 +32,16 @@ class TwitterMethods(SetupAPI):
                  access_secret,
                  consumer_key,
                  consumer_secret):
+
+        credentials = Path(filename)
+        creds = json.loads(credentials)
+
+        for key, value in creds.items():
+
+            self.access_token =
+            self.access_secret =
+            self.consumer_key =
+            self.consumer_secret =
 
         pass
 

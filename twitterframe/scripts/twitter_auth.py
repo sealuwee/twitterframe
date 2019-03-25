@@ -47,8 +47,11 @@ class SetupAPI(object):
         tw = open(filename.name, 'w+')
         tw.write(json.dumps(keys))
         tw.close()
-        print(check,'Keys have been stored in: ',filename,check)
+        print(check,'Keys have been stored in: ',filename.cwd(),check)
 
+        # testing this where to_json also returns the relative path and stores it as
+        # a variable to the json file created
+        return
 def check_auth():
     '''
     I hope this works
