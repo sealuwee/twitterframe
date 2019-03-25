@@ -37,8 +37,12 @@ config_path = utils.config_path
 @click.group()
 def cli():
     '''
-    Making this the main group function for simplicity sake to see how easy
-    it is to make this kind of application.
+    Twitterframe. All the things about twitter's API that we know and love,
+    packaged nicely into a command line application at the user's convenience.
+    Please use this application to your liking, and leave any comments or issues
+    in a pull request on GitHub.
+
+    Documentation coming soon! Along with more commands and options!
     '''
     pass
 
@@ -109,9 +113,10 @@ def setup():
     print(h,'--->',b,'--->',pidgeon)
     print(p*25)
 
+# might move this to utils.
 def reconfigure():
     '''
-    reconfig: opens config path
+    reconfig: opens path to config where keys are stored.
     '''
     print(b, 'Reconfiguring API...',b)
 
@@ -135,7 +140,7 @@ def reconfigure():
                 )
 def scrape(user, out, username):
     '''
-    Command that dumps all tweets from any user into  .csv file.
+    Scrape tweets from a specified user and dump into a .csv file.
     The file will be formatted as: 'username_tweets.csv'.
     Default username is ThePSF (Python Software Foundation).
     '''
