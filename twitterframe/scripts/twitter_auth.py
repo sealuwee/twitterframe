@@ -51,7 +51,8 @@ class SetupAPI(object):
 
         # testing this where to_json also returns the relative path and stores it as
         # a variable to the json file created
-        return
+
+        return filename.resolve()
 def check_auth():
     '''
     I hope this works
