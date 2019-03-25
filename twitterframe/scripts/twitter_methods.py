@@ -17,9 +17,9 @@ pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
 
-config_path = Path(os.environ['HOME']+'/.twitterframe')
+config_path = utils.config_path
 
-class TwitterAPI(object):
+class TwitterWrapper(object):
     '''
     subclass of SetupAPI
     TwitterTrends class.

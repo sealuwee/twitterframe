@@ -11,7 +11,7 @@ package.
 # make scritps for basic twitter API usage, users, friends, etc.
 
 
-from .scripts.twitter_methods import TwitterAPI
+from .scripts.twitter_methods import TwitterWrapper
 from .scripts import utils
 import click
 import os
@@ -30,8 +30,7 @@ check = utils.checkmark
 # global variables
 # default place to store keys ;)
 
-config_path = os.environ['HOME']+'/.twitterframe'
-
+config_path = utils.config_path
 # create variable to store SetupAPI object
 
 # first time using click
@@ -75,7 +74,7 @@ def setup():
     consumer_secret = click.prompt(h, 'Step 5: Secret Consumer Key: ',
                                    hide_input=False, prompt_suffix=' ')
 
-    # api = TwitterAPI(access_token, access_secret, consumer_key, consumer_secret)
+    # api = TwitterWrapper(access_token, access_secret, consumer_key, consumer_secret)
 
     print(b, 'API is almost setup',b)
     print(b, 'Just running through a quick check...', b)
@@ -141,7 +140,7 @@ def scrape(user, out, username):
     Default username is ThePSF (Python Software Foundation).
     '''
     credentials = reconfigure()
-    api = TwitterAPI(*credentials.values())
+    api = TwitterWrapper(*credentials.values())
 
     output_tweets = api.get_tweets(username)
 
@@ -151,4 +150,5 @@ def scrape(user, out, username):
         writer.writerow(['id', 'created_at', 'text'])
         writer.writerows(output_tweets)
 
-    print(pidgeon, 'CSV created at {}'.format(out),pidgeon)
+    out_path = Path(out).resolve()
+    print(pidgeon, check, 'CSV created at {}'.format(out_path))
