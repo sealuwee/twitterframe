@@ -132,13 +132,13 @@ def reconfigure():
     return credentials
 
 @cli.command('scrape')
-@click.option('--user', default='',
-              help='Specify a user to scrape.')
-@click.option('--out', default='tweets.csv',
-              help='Specify filename for csv.')
+# @click.option('--user', default='',
+#               help='Specify a user to scrape.')
+# @click.option('--out', default='tweets.csv',
+#               help='Specify filename for csv.')
 @click.argument('username', required=True,
                 )
-def scrape(user, out, username):
+def scrape(username):
     '''
     Scrape tweets from a specified user and dump into a .csv file.
     The file will be formatted as: 'username_tweets.csv'.
@@ -148,8 +148,9 @@ def scrape(user, out, username):
     api = TwitterWrapper(*credentials.values())
 
     output_tweets = api.get_tweets(username)
+    out = '{}_tweets.csv'.format(username)
 
-    with open(out, 'w') as tw:
+    with open(out, 'w+') as tw:
 
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text'])

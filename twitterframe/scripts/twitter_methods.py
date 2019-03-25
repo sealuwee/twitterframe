@@ -54,7 +54,7 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self, username):
+    def get_tweets(self, screen_name):
 
         '''
             Code redesigned from yanofsky:
@@ -67,7 +67,7 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        new_tweets = api.user_timeline(sceen_name=username, count=200)
+        new_tweets = api.user_timeline(sceen_name=screen_name, count=200)
 
         tweets.extend(new_tweets)
 
@@ -77,7 +77,7 @@ class TwitterWrapper(object):
 
             print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
 
-            new_tweets = api.user_timeline(screen_name=username, count=200,
+            new_tweets = api.user_timeline(screen_name=screen_name, count=200,
                                            max_id=oldest_tweets)
 
             tweets.extend(new_tweets)
@@ -86,12 +86,7 @@ class TwitterWrapper(object):
 
             print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
 
-            print(pidgeon, 'Getting more tweets before {}'.format(oldest_tweets))
-
         output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
 
-        print(check,pidgeon, '{} Tweets have been downloaded! '.format(len(output_tweets)))
-
         return output_tweets
-
 
