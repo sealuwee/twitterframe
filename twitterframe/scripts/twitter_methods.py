@@ -84,9 +84,13 @@ class TwitterWrapper(object):
 
             oldest_tweets = tweets[-1].id - 1
 
-            print(pidgeon, '... {} Amount of tweets downloaded so far'.format(len(tweets)))
+            print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
+
+            print(pidgeon, 'Getting more tweets before {}'.format(oldest_tweets))
 
         output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
+
+        print(check,pidgeon, '{} Tweets have been downloaded! '.format(len(output_tweets)))
 
         return output_tweets
 
