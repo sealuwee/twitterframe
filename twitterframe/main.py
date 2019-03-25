@@ -13,9 +13,8 @@ package.
 
 import twitterframe.scripts.twitter_auth as auth
 import twitterframe.scripts.utils as utils
-# from twitterframe.scripts.twitter_trends import TwitterMethods
+from twitterframe.scripts.twitter_trends import TwitterMethods
 import click
-import tweepy
 
 # emojis go here
 h = utils.hatching_chick
@@ -87,17 +86,17 @@ def setup():
     print(h,'--->',b,'--->',pidgeon)
     print(p*25)
 
-# @cli.command('scrape')
-# @click.option('--user', default='',
-#               help='Specify a user to scrape.')
-# @click.argument('username', required=True,
-#                 default='')
-# def scrape(user, username):
-#     '''
-#     Command that dumps all tweets from any user into  .csv file.
-#     The file will be formatted as: 'username_tweets.csv'.
-#     '''
+@cli.command('scrape')
+@click.option('--user', default='',
+              help='Specify a user to scrape.')
+@click.argument('username', required=True,
+                default='')
+def scrape(user, username):
+    '''
+    Command that dumps all tweets from any user into  .csv file.
+    The file will be formatted as: 'username_tweets.csv'.
+    '''
 
-#     tw = TwitterMethods()
-#     tw.get_tweets(username)
-#     print('it worked.')
+    tw = TwitterMethods()
+    tw.get_tweets(username)
+    print('it worked.')

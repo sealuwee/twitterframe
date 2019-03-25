@@ -7,7 +7,6 @@ import twitterframe.scripts.utils as utils
 import tweepy
 import json
 import csv
-import click
 from pathlib import Path
 
 h = utils.hatching_chick
@@ -33,17 +32,20 @@ class TwitterMethods(object):
                  consumer_key,
                  consumer_secret):
 
-        credentials = Path(filename)
-        creds = json.loads(credentials)
+        cwd = Path().cwd()
+        parent_path = cwd.parents[1]
 
-        for key, value in creds.items():
+        for file in parent_path.glob('*.json'):
+            if file.exists() is True:
+                creds_path = file
 
-            self.access_token =
-            self.access_secret =
-            self.consumer_key =
-            self.consumer_secret =
+        with open(creds_path, encoding='utf-8') as creds:
+            credentials = json.loads(creds.read())
 
-        pass
+        self.access_token = credentials['access_token']
+        self.access_secret = credentials['access_secret']
+        self.consumer_key = credentials['consumer_key']
+        self.consumer_secret = credentials['consumer_secret']
 
     def setup(self):
 
@@ -60,7 +62,7 @@ class TwitterMethods(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self,username=''):
+    def get_tweets(self, username=''):
 
         '''
             Code redesigned from yanofsky:
