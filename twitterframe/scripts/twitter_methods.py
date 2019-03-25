@@ -54,7 +54,7 @@ class TwitterAPI(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self, username=''):
+    def get_tweets(self, username):
 
         '''
             Code redesigned from yanofsky:
@@ -88,13 +88,6 @@ class TwitterAPI(object):
 
         output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
 
-        with open('{}_tweets.csv'.format(username), 'w') as tw:
-
-            writer = csv.writer(tw)
-            writer.writerow(['id', 'created_at', 'text'])
-            writer.writerows(output_tweets)
-
-        pass
-
+        return output_tweets
 
 

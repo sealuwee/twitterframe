@@ -17,6 +17,7 @@ import click
 import os
 from pathlib import Path
 import json
+import csv
 
 # emojis go here
 h = utils.hatching_chick
@@ -129,16 +130,25 @@ def reconfigure():
 @cli.command('scrape')
 @click.option('--user', default='',
               help='Specify a user to scrape.')
+@click.option('--out', default='tweets.csv',
+              help='Specify filename for csv.')
 @click.argument('username', required=True,
-                default='ThePSF')
-def scrape(user, username):
+                )
+def scrape(user, out, username):
     '''
     Command that dumps all tweets from any user into  .csv file.
     The file will be formatted as: 'username_tweets.csv'.
     Default username is ThePSF (Python Software Foundation).
     '''
     credentials = reconfigure()
-    tw = TwitterAPI(*credentials.values())
+    api = TwitterAPI(*credentials.values())
 
-    tw.get_tweets(username)
-    print('it worked.')
+    output_tweets = api.get_tweets(username)
+
+    with open(out, 'w') as tw:
+
+        writer = csv.writer(tw)
+        writer.writerow(['id', 'created_at', 'text'])
+        writer.writerows(output_tweets)
+
+    print(pidgeon, 'CSV created at {}'.format(out),pidgeon)
