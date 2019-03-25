@@ -3,10 +3,11 @@ twitter-trends.py : uh
 '''
 #
 
-import twitterframe.scripts.utils as utils
+from . import utils
 import tweepy
 import json
 import csv
+import os
 from pathlib import Path
 
 h = utils.hatching_chick
@@ -16,7 +17,9 @@ pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
 
-class TwitterMethods(object):
+config_path = Path(os.environ['HOME']+'/.twitterframe')
+
+class TwitterAPI(object):
     '''
     subclass of SetupAPI
     TwitterTrends class.
@@ -31,21 +34,10 @@ class TwitterMethods(object):
                  access_secret,
                  consumer_key,
                  consumer_secret):
-
-        cwd = Path().cwd()
-        parent_path = cwd.parents[1]
-
-        for file in parent_path.glob('*.json'):
-            if file.exists() is True:
-                creds_path = file
-
-        with open(creds_path, encoding='utf-8') as creds:
-            credentials = json.loads(creds.read())
-
-        self.access_token = credentials['access_token']
-        self.access_secret = credentials['access_secret']
-        self.consumer_key = credentials['consumer_key']
-        self.consumer_secret = credentials['consumer_secret']
+        self.access_token = access_token
+        self.access_secret = access_secret
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
 
     def setup(self):
 
@@ -85,7 +77,8 @@ class TwitterMethods(object):
 
             print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
 
-            new_tweets = api.user_timeline(screen_name=username, count=200,max_id=oldest_tweets)
+            new_tweets = api.user_timeline(screen_name=username, count=200,
+                                           max_id=oldest_tweets)
 
             tweets.extend(new_tweets)
 

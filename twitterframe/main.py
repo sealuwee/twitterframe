@@ -11,10 +11,12 @@ package.
 # make scritps for basic twitter API usage, users, friends, etc.
 
 
-import twitterframe.scripts.twitter_auth as auth
-import twitterframe.scripts.utils as utils
-from twitterframe.scripts.twitter_trends import TwitterMethods
+from .scripts.twitter_methods import TwitterAPI
+from .scripts import utils
 import click
+import os
+from pathlib import Path
+import json
 
 # emojis go here
 h = utils.hatching_chick
@@ -24,9 +26,12 @@ pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
 
-# create variable to store SetupAPI object
+# global variables
+# default place to store keys ;)
 
-api = auth.SetupAPI()
+config_path = os.environ['HOME']+'/.twitterframe'
+
+# create variable to store SetupAPI object
 
 # first time using click
 @click.group()
@@ -43,41 +48,59 @@ def setup():
     Prompt to add Twitter API credentials into a JSON file.
     '''
     print(b, 'Setting up API...',b)
-    auth.check_auth()
+
+    home = Path(config_path)
+     # or Path('twitterframe.json').exists()
+    if home.exists():
+        print(w*3, 'Credentials file already exists.',w*3)
+        return
+
+    print(h, '-------------------------')
+    print(h, '[Step 1: Create an account on https://developer.twitter.com]')
+    print(h, '-------------------------')
+    # print(h, 'Step 2: Twitter API Access Token: ', end=' ')
+    access_token = click.prompt(h, 'Step 2: Twitter API Access Token: ',
+                                hide_input=False, prompt_suffix=' ')
+    print(h, '-------------------------')
+    # print(h, 'Step 3: Secret Access Token: ', end=' ')
+    access_secret = click.prompt(h, 'Step 3: Secret Access Token: ',
+                                 hide_input=False, prompt_suffix=' ')
+    print(h, '-------------------------')
+    # print(h, 'Step 4: Consumer Key: ', end=' ')
+    consumer_key = click.prompt(h, 'Step 4: Consumer Key: ',
+                                hide_input=False, prompt_suffix=' ')
+    print(h, '-------------------------')
+    # print(h, 'Step 5: Secret Consumer Key: ', end=' ')
+    consumer_secret = click.prompt(h, 'Step 5: Secret Consumer Key: ',
+                                   hide_input=False, prompt_suffix=' ')
+
+    # api = TwitterAPI(access_token, access_secret, consumer_key, consumer_secret)
+
     print(b, 'API is almost setup',b)
     print(b, 'Just running through a quick check...', b)
-    try:
-
-        assert len(api.access_token) != None
-        assert len(api.access_secret) != None
-        assert len(api.consumer_key) != None
-        assert len(api.consumer_secret) != None
-        # assert len(api.access_token) == 20
-        # assert len(api.access_secret) == 42
-        # assert len(api.consumer_key) == 50
-        # assert len(api.consumer_secret) == 39
-
-    except ValueError:
-        print(w*3, 'You did not enter valid keys.', w*3)
-        print('Please sign up for a Twitter developer account.')
 
     print(b, 'JSON file needs to be created to store your API keys', b)
     print(b, 'When prompted to, please specify a filename.', b)
-    print(b, 'Type the following command in the command line if a prompt does not show up.', b)
-    print(b, '>>> twitterframe -n creds <<<', b)
-    print(b, 'sans the emojis.', b)
     print(b, 'Specififying a filename creates a JSON file, if you did not create one already.', b)
 
-    filename=click.prompt(b, 'Filename for Twitter Credentials: ',
-                          hide_input=False)
+    # filename = click.prompt(b, 'Filename for Twitter Credentials: ',
+    #                         default=config_path, hide_input=False,)
+    keys = {
+            'access_token': access_token,
+            'access_secret': access_secret,
+            'consumer_key': consumer_key,
+            'consumer_secret': consumer_secret
+        }
 
-    if filename == None:
-        print(w*3, 'Please specify a valid name for the keys file. ',w*3)
-        filename=click.prompt(w*3,'Filename to store Twitter credentials: ',
-                              hide_input=False)
-
-    api.to_json(filename)
-
+    filename = Path(config_path)
+    print(filename)
+    # if '.json' not in filename.parts[-1]:
+    #     print(check, 'Made file extension as .json',check)
+    #     filename = filename.joinpath(filename.parts[-1]+'.json')
+    tw = open(filename, 'w+')
+    tw.write(json.dumps(keys))
+    tw.close()
+    print(check, 'Keys have been stored in: ', filename.resolve(), check)
     print(p*25)
     print(pidgeon,'API Keys have been stored!',pidgeon)
     print(pidgeon,'API is ready to be used!',pidgeon)
@@ -86,17 +109,36 @@ def setup():
     print(h,'--->',b,'--->',pidgeon)
     print(p*25)
 
+def reconfigure():
+    '''
+    reconfig: opens config path
+    '''
+    print(b, 'Reconfiguring API...',b)
+
+    home = Path(config_path)
+    # or Path('twitterframe.json').exists()
+    if not home.exists():
+        print(w*3, 'Credentials file does not exist.', w*3)
+        return {}
+
+    with open(config_path) as creds:
+        credentials = json.loads(creds.read())
+
+    return credentials
+
 @cli.command('scrape')
 @click.option('--user', default='',
               help='Specify a user to scrape.')
 @click.argument('username', required=True,
-                default='')
+                default='ThePSF')
 def scrape(user, username):
     '''
     Command that dumps all tweets from any user into  .csv file.
     The file will be formatted as: 'username_tweets.csv'.
+    Default username is ThePSF (Python Software Foundation).
     '''
+    credentials = reconfigure()
+    tw = TwitterAPI(*credentials.values())
 
-    tw = TwitterMethods()
     tw.get_tweets(username)
     print('it worked.')
