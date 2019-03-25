@@ -74,18 +74,18 @@ def check_auth():
     print(h, '-------------------------')
     # print(h, 'Step 2: Twitter API Access Token: ', end=' ')
     access_token = click.prompt(h, 'Step 2: Twitter API Access Token: ',
-                                hide_input=True, prompt_suffix=' ')
+                                hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
     # print(h, 'Step 3: Secret Access Token: ', end=' ')
     access_secret = click.prompt(h, 'Step 3: Secret Access Token: ',
-                                 hide_input=True, prompt_suffix=' ')
+                                 hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
     # print(h, 'Step 4: Consumer Key: ', end=' ')
     consumer_key = click.prompt(h, 'Step 4: Consumer Key: ',
-                                hide_input=True, prompt_suffix=' ')
+                                hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
     # print(h, 'Step 5: Secret Consumer Key: ', end=' ')
     consumer_secret = click.prompt(h, 'Step 5: Secret Consumer Key: ',
-                                   hide_input=True, prompt_suffix=' ')
+                                   hide_input=False, prompt_suffix=' ')
 
     return SetupAPI(access_token, access_secret, consumer_key, consumer_secret)
