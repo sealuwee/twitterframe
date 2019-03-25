@@ -8,6 +8,7 @@ import twitterframe.scripts.utils as utils
 import tweepy
 import json
 import csv
+import click
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -31,7 +32,23 @@ class TwitterMethods(SetupAPI):
                  access_secret,
                  consumer_key,
                  consumer_secret):
+
         pass
+
+    def setup(self):
+
+        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth.set_access_token(self.access_token, self.access_secret)
+
+        api = tweepy.API(auth)
+
+        return api
+
+    def get_timeline(self):
+        '''
+        https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline
+        '''
+        return [tweet.text for tweet in self.setup().home_timeline()]
 
     def get_tweets(self,username=''):
 

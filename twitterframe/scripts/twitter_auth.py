@@ -49,21 +49,6 @@ class SetupAPI(object):
         tw.close()
         print(check,'Keys have been stored in: ',filename,check)
 
-    def setup(self):
-
-        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
-        auth.set_access_token(self.access_token, self.access_secret)
-
-        api = tweepy.API(auth)
-
-        return api
-
-    def get_timeline(self):
-        '''
-        https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline
-        '''
-        return [tweet.text for tweet in self.setup().home_timeline()]
-
 def check_auth():
     '''
     I hope this works
