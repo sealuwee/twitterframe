@@ -61,6 +61,8 @@ class TwitterWrapper(object):
             https://gist.github.com/yanofsky/5436496
             and the Python 3.x version:
             https://gist.github.com/gabrielsoule/638201ac0cc12828d3cde69035a25336
+
+            Not functioning correctly.
         '''
 
         api = self.setup()
@@ -94,6 +96,8 @@ class TwitterWrapper(object):
 
         '''
             Crawl method for hashtags.
+            This may not work yet lol.
+            Will push to pypi.org when this is done.
         '''
 
         api = self.setup()
