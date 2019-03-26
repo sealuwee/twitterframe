@@ -54,7 +54,7 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self, screen_name):
+    def get_tweets(self, username,count=int(200)):
 
         '''
             Code redesigned from yanofsky:
@@ -69,10 +69,11 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        new_tweets = tweepy.Cursor(api.user_timeline, sceen_name=screen_name,
-                                   count=200)
+        for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
+                                   ).items(count):
 
-        tweets.extend(new_tweets)
+            tweets.append([username, tweet.id_str, tweet.created_at,
+                           tweet.text.encode('utf-8')])
 
         oldest_tweets = tweets[-1].id - 1
 
@@ -80,7 +81,7 @@ class TwitterWrapper(object):
 
             print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
 
-            new_tweets = api.user_timeline(screen_name=screen_name, count=200,
+            new_tweets = tweepy.Cursor(api.user_timeline, screen_name=username, count=200,
                                            max_id=oldest_tweets)
 
             tweets.extend(new_tweets)
