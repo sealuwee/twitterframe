@@ -90,3 +90,23 @@ class TwitterWrapper(object):
 
         return output_tweets
 
+    def crawl(self, hashtag, time):
+
+        '''
+            Crawl method for hashtags.
+        '''
+
+        api = self.setup()
+
+        tweets = []
+
+        writer = csv.writer()
+
+        for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
+                                   rpp=100, lang='en', since='{}'.format(time),
+                                   ).items():
+
+            writer.writerow([tweet.created_at, tweet.text.encode('utf-8')])
+
+        new_tweets = time
+

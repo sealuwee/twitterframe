@@ -110,15 +110,16 @@ def setup():
     print(pidgeon,'API is ready to be used!',pidgeon)
     print(pidgeon,'twitterframe -h to see all commands and arguments.',pidgeon)
     print(pidgeon,'Thank you for using twitterframe, and big thanks to my contributors',pidgeon)
-    print(h,'--->',b,'--->',pidgeon)
+    print(h, '--->', b, '--->', pidgeon)
     print(p*25)
 
 # might move this to utils.
+
 def reconfigure():
     '''
     reconfig: opens path to config where keys are stored.
     '''
-    print(b, 'Reconfiguring API...',b)
+    print(b, 'Reconfiguring API...', b)
 
     home = Path(config_path)
     # or Path('twitterframe.json').exists()
@@ -149,7 +150,7 @@ def scrape(username):
     output_tweets = api.get_tweets(username)
     out = '{}_tweets.csv'.format(username)
 
-    with open(out, 'w+') as tw:
+    with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text'])
@@ -157,3 +158,27 @@ def scrape(username):
 
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
+
+@cli.command('crawl')
+@click.argument('hashtag', required=True)
+def crawl(hashtag):
+    '''
+    Crawl tweets by specified hashtag and dump into a .csv file.
+    The file
+    '''
+    credentials = reconfigure()
+    api = TwitterWrapper(*credentials.values())
+
+    output_tweets = api.crawl(hashtag)
+    out = '{}_hashtags.csv'.format(hashtag)
+
+    with open(out, 'w') as tw:
+
+        writer = csv.writer(tw)
+        writer.writerow(['created_at', 'text'])
+        writer.writerows(output_tweets)
+
+    out_path = Path(out).resolve()
+    print(pidgeon, check, 'CSV created at {}'.format(out_path))
+
+
