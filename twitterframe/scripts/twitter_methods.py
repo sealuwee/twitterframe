@@ -69,7 +69,8 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        new_tweets = api.user_timeline(sceen_name=screen_name, count=200)
+        new_tweets = tweepy.Cursor(api.user_timeline, sceen_name=screen_name,
+                                   count=200)
 
         tweets.extend(new_tweets)
 
