@@ -55,7 +55,6 @@ class TwitterWrapper(object):
         return [tweet.text for tweet in self.setup().home_timeline()]
 
     def get_tweets(self, username,count=int(200)):
-
         '''
             Code redesigned from yanofsky:
             https://gist.github.com/yanofsky/5436496
@@ -64,16 +63,19 @@ class TwitterWrapper(object):
 
             Not functioning correctly.
         '''
-
         api = self.setup()
 
         tweets = []
 
-        for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
-                                   ).items(count):
+        # for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
+        #                            ).items(count):
+        #     tweets.append([username, tweet.id_str, tweet.created_at,
+        #                    tweet.text.encode('utf-8')])
 
-            tweets.append([username, tweet.id_str, tweet.created_at,
-                           tweet.text.encode('utf-8')])
+        new_tweets = api.user_timeline(screen_name=username,
+                                       count=count)
+
+        tweets.extend(new_tweets)
 
         oldest_tweets = tweets[-1].id - 1
 
@@ -91,18 +93,17 @@ class TwitterWrapper(object):
 
             print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
 
-        output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
+        output_tweets = [[tweet.id_str, tweet.created_at,
+                          tweet.text.encode("utf-8")] for tweet in tweets]
 
         return output_tweets
 
     def crawl(self, hashtag, time):
-
         '''
             Crawl method for hashtags.
             This may not work yet lol.
             Will push to pypi.org when this is done.
         '''
-
         api = self.setup()
 
         tweets = []
@@ -117,9 +118,11 @@ class TwitterWrapper(object):
 
             print(pidgeon, '... {} Amout of tweets dowloaded so far...'.format(len(tweets)))
 
-        output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
+        output_tweets = [[tweet.id_str, tweet.created_at,
+                          tweet.text.encode("utf-8")] for tweet in tweets]
 
         return output_tweets
+
 
 
 

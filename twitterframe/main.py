@@ -62,33 +62,24 @@ def setup():
     print(h, '-------------------------')
     print(h, '[Step 1: Create an account on https://developer.twitter.com]')
     print(h, '-------------------------')
-    # print(h, 'Step 2: Twitter API Access Token: ', end=' ')
     access_token = click.prompt(h, 'Step 2: Twitter API Access Token: ',
                                 hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
-    # print(h, 'Step 3: Secret Access Token: ', end=' ')
     access_secret = click.prompt(h, 'Step 3: Secret Access Token: ',
                                  hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
-    # print(h, 'Step 4: Consumer Key: ', end=' ')
     consumer_key = click.prompt(h, 'Step 4: Consumer Key: ',
                                 hide_input=False, prompt_suffix=' ')
     print(h, '-------------------------')
-    # print(h, 'Step 5: Secret Consumer Key: ', end=' ')
     consumer_secret = click.prompt(h, 'Step 5: Secret Consumer Key: ',
                                    hide_input=False, prompt_suffix=' ')
 
-    # api = TwitterWrapper(access_token, access_secret, consumer_key, consumer_secret)
-
     print(b, 'API is almost setup',b)
     print(b, 'Just running through a quick check...', b)
-
     print(b, 'JSON file needs to be created to store your API keys', b)
     print(b, 'When prompted to, please specify a filename.', b)
     print(b, 'Specififying a filename creates a JSON file, if you did not create one already.', b)
 
-    # filename = click.prompt(b, 'Filename for Twitter Credentials: ',
-    #                         default=config_path, hide_input=False,)
     keys = {
             'access_token': access_token,
             'access_secret': access_secret,
@@ -142,7 +133,6 @@ def scrape(username):
     '''
     Scrape tweets from a specified user and dump into a .csv file.
     The file will be formatted as: 'username_tweets.csv'.
-    Default username is ThePSF (Python Software Foundation).
     '''
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
@@ -164,7 +154,7 @@ def scrape(username):
 def crawl(hashtag):
     '''
     Crawl tweets by specified hashtag and dump into a .csv file.
-    The file
+    The file will be formatted as: 'hashtag_tweets.csv'.
     '''
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
@@ -180,5 +170,4 @@ def crawl(hashtag):
 
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
-
 
