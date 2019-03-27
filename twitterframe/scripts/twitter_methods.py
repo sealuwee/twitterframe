@@ -69,7 +69,7 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
+        for tweet in tweepy.Cursor(api.user_timeline, id=username,
                                    ).items():
 
             tweets.append([username, tweet.id_str, tweet.created_at,
@@ -117,7 +117,7 @@ class TwitterWrapper(object):
         tweets = []
 
         for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                   rpp=100,
+                                   rpp=100, page=10,
                                    lang='en',
                                    ).items():
 

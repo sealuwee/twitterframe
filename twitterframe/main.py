@@ -191,7 +191,7 @@ def crawl(hashtag):
     api = TwitterWrapper(*credentials.values())
 
     output_tweets = api.crawl(hashtag)
-    time.sleep(2)
+    time.sleep(1)
     out = '{}_hashtags.csv'.format(hashtag)
 
     with open(out, 'w+') as tw:
