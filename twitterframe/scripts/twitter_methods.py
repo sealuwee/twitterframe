@@ -97,12 +97,10 @@ class TwitterWrapper(object):
             tweets.append([hashtag, tweet.id_str, tweet.created_at,
                            tweet.text.encode('utf-8')])
 
-            print(pidgeon, '... {} Amout of tweets dowloaded so far...'.format(len(tweets)))
 
-        output_tweets = [[tweet.id_str, tweet.created_at,
-                          tweet.text.encode("utf-8")] for tweet in tweets]
+        print(pidgeon, '{} Downloaded tweets, with the hashtag {}...'.format(len(tweets),hashtag))
 
-        return output_tweets
+        return tweets
 
 
 
