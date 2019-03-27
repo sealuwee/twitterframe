@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import json
 import csv
+import time
 
 # emojis go here
 h = utils.hatching_chick
@@ -113,7 +114,6 @@ def reconfigure():
     print(b, 'Reconfiguring API...', b)
 
     home = Path(config_path)
-    # or Path('twitterframe.json').exists()
     if not home.exists():
         print(w*3, 'Credentials file does not exist.', w*3)
         return {}
@@ -138,6 +138,7 @@ def scrape(username):
     api = TwitterWrapper(*credentials.values())
 
     output_tweets = api.get_tweets(username)
+    time.sleep(2)
     out = '{}_tweets.csv'.format(username)
 
     with open(out, 'w') as tw:
@@ -160,6 +161,7 @@ def crawl(hashtag):
     api = TwitterWrapper(*credentials.values())
 
     output_tweets = api.crawl(hashtag)
+    time.sleep(2)
     out = '{}_hashtags.csv'.format(hashtag)
 
     with open(out, 'w') as tw:

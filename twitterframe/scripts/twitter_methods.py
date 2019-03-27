@@ -70,10 +70,10 @@ class TwitterWrapper(object):
         for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
                                    ).items(count):
 
-            print(pidgeon, 'Downloading {} tweets ...'.format(len(tweets)))
-
             tweets.append([username, tweet.id_str, tweet.created_at,
                            tweet.text.encode('utf-8')])
+
+        print(pidgeon, 'Downloading {} tweets ...'.format(len(tweets)))
 
         # new_tweets = api.user_timeline(screen_name=username,
         #                                count=count)
