@@ -106,6 +106,19 @@ def setup():
     print(p*25)
 
 # might move this to utils.
+@cli.command('reset')
+@cli.option('-a', help='Reset all credentials.')
+def reset_creds(a):
+
+    home = Path(config_path)
+    if home.exists():
+        print(w*3, 'Attempting to reset Twitter credentials...')
+        click.confirm(w*3, 'Are you sure you want to do this?',
+                      abort=True)
+        # after this prompt, we want to remove the file in the home directory.
+        # not sure how to do that.
+    else:
+        print('You have not setup twitterframe with your Twitter credentials.')
 
 def reconfigure():
     '''

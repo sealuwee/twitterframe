@@ -30,7 +30,7 @@
 
 ### Contributors with 💚
 
-- @colejhudson
+🏆 @colejhudson
 
 ### Contact
 
