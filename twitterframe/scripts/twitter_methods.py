@@ -77,32 +77,6 @@ class TwitterWrapper(object):
 
         print(pidgeon, 'Downloading {} tweets ...'.format(len(tweets)))
 
-        # new_tweets = api.user_timeline(screen_name=username,
-        #                                count=count)
-
-        # tweets.extend(new_tweets)
-
-        # oldest_tweets = tweets[-1].id - 1
-
-        # while len(tweets) > 0:
-
-        #     print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
-
-        #     for tweet in tweepy.Cursor(api.user_timeline, screen_name=username,
-        #                                count=200, max_id=oldest_tweets).items(count):
-
-        #         tweets.append([username, tweet.id_str, tweet.created_at,
-        #                        tweet.text.encode('utf-8')])
-
-        #     oldest_tweets = tweets[-1].id - 1
-
-        #     print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
-
-        # output_tweets = [[tweet.id_str, tweet.created_at,
-        #                   tweet.text.encode("utf-8")] for tweet in tweets]
-
-        # return output_tweets
-
         return tweets
 
     def crawl(self, hashtag):
@@ -117,7 +91,6 @@ class TwitterWrapper(object):
         tweets = []
 
         for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                   rpp=100, page=10,
                                    lang='en',
                                    ).items():
 

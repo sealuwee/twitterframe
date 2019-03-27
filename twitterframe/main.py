@@ -194,7 +194,7 @@ def crawl(hashtag):
     time.sleep(1)
     out = '{}_hashtags.csv'.format(hashtag)
 
-    with open(out, 'w+') as tw:
+    with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
         writer.writerow(['created_at', 'text'])
