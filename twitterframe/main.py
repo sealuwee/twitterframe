@@ -117,6 +117,10 @@ def reset_creds(a):
                       abort=True)
         # after this prompt, we want to remove the file in the home directory.
         # not sure how to do that.
+        home.unlink()
+        print(check, 'Twitter credentials have been removed.')
+        print(pidgeon, 'Please update credentials with twitterframe setup.')
+
     else:
         print('You have not setup twitterframe with your Twitter credentials.')
 
