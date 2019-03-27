@@ -1,5 +1,5 @@
 # twitterframe
-🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.
+🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.
 
 # Progress so far...
 
@@ -13,8 +13,15 @@
 
 🔜 Make some basic documentation on installation/usage.
 
+# Ideas on new features and commands
 
-# Known issues...
+💡 Command that removes your Twitter API credentials file from your home directory.
+
+💡 Command that dumps tweets into a SQL database.
+
+💡 Add more emojis.
+
+# Known issues
 
 ❗️Scrape command is not scraping by specified user.
 

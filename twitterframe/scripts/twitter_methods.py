@@ -54,7 +54,7 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self, username,count=int(200)):
+    def get_tweets(self, username):
         '''
             Code redesigned from yanofsky:
             https://gist.github.com/yanofsky/5436496
@@ -62,13 +62,15 @@ class TwitterWrapper(object):
             https://gist.github.com/gabrielsoule/638201ac0cc12828d3cde69035a25336
 
             Not functioning correctly.
+
+            Removed the count paramter.
         '''
         api = self.setup()
 
         tweets = []
 
         for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
-                                   ).items(count):
+                                   ).items():
 
             tweets.append([username, tweet.id_str, tweet.created_at,
                            tweet.text.encode('utf-8')])
