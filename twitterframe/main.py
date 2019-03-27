@@ -36,6 +36,8 @@ config_path = utils.config_path
 
 # first time using click
 @click.group()
+@click.help_option(help='Call if you need help.')
+@click.version_option()
 def cli():
     '''
     Twitterframe. All the things about twitter's API that we know and love,
