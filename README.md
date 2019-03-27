@@ -9,17 +9,21 @@
 
 ✅ Functional Command Line Application by invoking ```twitterframe```
 
+✅ Added a command that removes your Twitter API credentials file from your home directory.
+
 🔜 Open up the project on pypi.org so it can be 'pip-install-able'
 
 🔜 Make some basic documentation on installation/usage.
 
 # Ideas on new features and commands
 
-💡 Command that removes your Twitter API credentials file from your home directory.
-
 💡 Command that dumps tweets into a SQL database.
 
 💡 Add more emojis.
+
+💡 Add click.progress_bar(s) on commands like scrape and crawl to show progress.
+
+💡 Remove some of the comments because the code looks kinda ugly.
 
 # Known issues
 
