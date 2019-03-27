@@ -77,14 +77,15 @@ class TwitterWrapper(object):
 
         oldest_tweets = tweets[-1].id - 1
 
-        while len(new_tweets) > 0:
+        while len(tweets) > 0:
 
             print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
 
-            new_tweets = tweepy.Cursor(api.user_timeline, screen_name=username, count=200,
-                                           max_id=oldest_tweets)
+            for tweet in tweepy.Cursor(api.user_timeline, screen_name=username,
+                                       count=200, max_id=oldest_tweets).items(count):
 
-            tweets.extend(new_tweets)
+                tweets.append([username, tweet.id_str, tweet.created_at,
+                               tweet.text.encode('utf-8')])
 
             oldest_tweets = tweets[-1].id - 1
 
@@ -106,13 +107,19 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        writer = csv.writer()
-
         for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                   rpp=100, lang='en', since='{}'.format(time),
+                                   rpp=100, page=10,
+                                   lang='en', since='{}'.format(time),
                                    ).items():
 
-            writer.writerow([tweet.created_at, tweet.text.encode('utf-8')])
+            tweets.append([hashtag, tweet.id_str, tweet.created_at,
+                           tweet.text.encode('utf-8')])
 
-        new_tweets = time
+            print(pidgeon, '... {} Amout of tweets dowloaded so far...'.format(len(tweets)))
+
+        output_tweets = [[tweet.id_str, tweet.created_at, tweet.text.encode("utf-8")] for tweet in tweets]
+
+        return output_tweets
+
+
 
