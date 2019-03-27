@@ -11,6 +11,8 @@
 
 ✅ Added a command that removes your Twitter API credentials file from your home directory.
 
+✅ Scrape command is now functioning as it should be.
+
 🔜 Open up project on pypi.org so it can be 'pip-install-able'
 
 🔜 Make some basic documentation on installation/usage.
@@ -26,10 +28,6 @@
 💡 Remove some of the comments because the code looks kinda ugly.
 
 # Known issues
-
-❗️Scrape command is not scraping by specified user.
-
-❗️Scrape instead decides to scrape the tweets from the developer's timeline.
 
 ❗️Crawl command is not pulling tweets by the specified times.
 

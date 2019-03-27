@@ -56,14 +56,8 @@ class TwitterWrapper(object):
 
     def get_user_tweets(self, username):
         '''
-            Code redesigned from yanofsky:
-            https://gist.github.com/yanofsky/5436496
-            and the Python 3.x version:
-            https://gist.github.com/gabrielsoule/638201ac0cc12828d3cde69035a25336
-
-            Not functioning correctly.
-
-            Removed the count paramter.
+           Get tweets by username with the tweepy.API method --> user_timeline.
+           This works.
         '''
         api = self.setup()
 
