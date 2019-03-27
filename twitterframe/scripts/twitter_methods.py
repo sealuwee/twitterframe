@@ -67,36 +67,41 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        # for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
-        #                            ).items(count):
-        #     tweets.append([username, tweet.id_str, tweet.created_at,
-        #                    tweet.text.encode('utf-8')])
+        for tweet in tweepy.Cursor(api.user_timeline, sceen_name=username,
+                                   ).items(count):
 
-        new_tweets = api.user_timeline(screen_name=username,
-                                       count=count)
+            print(pidgeon, 'Downloading {} tweets ...'.format(len(tweets)))
 
-        tweets.extend(new_tweets)
+            tweets.append([username, tweet.id_str, tweet.created_at,
+                           tweet.text.encode('utf-8')])
 
-        oldest_tweets = tweets[-1].id - 1
+        # new_tweets = api.user_timeline(screen_name=username,
+        #                                count=count)
 
-        while len(tweets) > 0:
+        # tweets.extend(new_tweets)
 
-            print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
+        # oldest_tweets = tweets[-1].id - 1
 
-            for tweet in tweepy.Cursor(api.user_timeline, screen_name=username,
-                                       count=200, max_id=oldest_tweets).items(count):
+        # while len(tweets) > 0:
 
-                tweets.append([username, tweet.id_str, tweet.created_at,
-                               tweet.text.encode('utf-8')])
+        #     print(pidgeon, 'Getting tweets before {}'.format(oldest_tweets))
 
-            oldest_tweets = tweets[-1].id - 1
+        #     for tweet in tweepy.Cursor(api.user_timeline, screen_name=username,
+        #                                count=200, max_id=oldest_tweets).items(count):
 
-            print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
+        #         tweets.append([username, tweet.id_str, tweet.created_at,
+        #                        tweet.text.encode('utf-8')])
 
-        output_tweets = [[tweet.id_str, tweet.created_at,
-                          tweet.text.encode("utf-8")] for tweet in tweets]
+        #     oldest_tweets = tweets[-1].id - 1
 
-        return output_tweets
+        #     print(pidgeon, '... {} Amount of tweets downloaded so far...'.format(len(tweets)))
+
+        # output_tweets = [[tweet.id_str, tweet.created_at,
+        #                   tweet.text.encode("utf-8")] for tweet in tweets]
+
+        # return output_tweets
+
+        return tweets
 
     def crawl(self, hashtag, time):
         '''
