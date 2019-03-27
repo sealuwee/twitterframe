@@ -107,8 +107,7 @@ def setup():
 
 # might move this to utils.
 @cli.command('reset')
-@click.option('-a', help='Reset all credentials.')
-def reset_creds(a):
+def reset_creds():
     '''
     Reset your TwitterAPI credentials for easy re-use.
     '''
@@ -121,7 +120,7 @@ def reset_creds(a):
         # not sure how to do that.
         home.unlink()
         print(check, 'Twitter credentials have been removed.')
-        print(pidgeon, 'Please update credentials with twitterframe setup.')
+        print(pidgeon, 'Please update credentials with $ twitterframe setup.')
 
     else:
         print('You have not setup twitterframe with your Twitter credentials.')
