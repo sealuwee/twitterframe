@@ -107,9 +107,11 @@ def setup():
 
 # might move this to utils.
 @cli.command('reset')
-@cli.option('-a', help='Reset all credentials.')
+@click.option('-a', help='Reset all credentials.')
 def reset_creds(a):
-
+    '''
+    Reset your TwitterAPI credentials for easy re-use.
+    '''
     home = Path(config_path)
     if home.exists():
         print(w*3, 'Attempting to reset Twitter credentials...')
