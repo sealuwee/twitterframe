@@ -27,6 +27,7 @@ p = utils.party
 pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
+egg = utils.egg
 
 # global variables
 # default place to store keys ;)
@@ -131,7 +132,7 @@ def reconfigure():
     '''
     reconfig: opens path to config where keys are stored.
     '''
-    print(b, 'Reconfiguring API...', b)
+    print(b, 'Checking credentials for API...', b)
 
     home = Path(config_path)
     if not home.exists():
@@ -148,17 +149,26 @@ def reconfigure():
 #               help='Specify a user to scrape.')
 # @click.option('--out', default='tweets.csv',
 #               help='Specify filename for csv.')
-@click.argument('username', required=True)
-def scrape(username):
+# @click.argument('username', required=True)
+def scrape():
     '''
     Scrape tweets from a specified user and dump into a .csv file.
     The file will be formatted as: 'username_tweets.csv'.
     '''
+
     credentials = reconfigure()
+
     api = TwitterWrapper(*credentials.values())
 
-    output_tweets = api.get_tweets(username)
-    time.sleep(2)
+    username = click.prompt(egg, 'Input Username ', prompt_suffix=': ')
+
+    if username == None:
+        print(w*3,'Must specify a username from twitter.com')
+        return
+
+    print(check, 'Beginning to scrape user: {}'.format(username))
+    output_tweets = api.get_user_tweets(username)
+    time.sleep(1)
     out = '{}_tweets.csv'.format(username)
 
     with open(out, 'w') as tw:

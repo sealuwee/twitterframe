@@ -54,7 +54,7 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_tweets(self, username):
+    def get_user_tweets(self, username):
         '''
             Code redesigned from yanofsky:
             https://gist.github.com/yanofsky/5436496
