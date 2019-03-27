@@ -105,19 +105,20 @@ class TwitterWrapper(object):
 
         return tweets
 
-    def crawl(self, hashtag, time):
+    def crawl(self, hashtag):
         '''
             Crawl method for hashtags.
             This may not work yet lol.
             Will push to pypi.org when this is done.
+            since='{}'.format(time) <-- removed this from api.search.
         '''
         api = self.setup()
 
         tweets = []
 
         for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                   rpp=100, page=10,
-                                   lang='en', since='{}'.format(time),
+                                   rpp=100,
+                                   lang='en',
                                    ).items():
 
             tweets.append([hashtag, tweet.id_str, tweet.created_at,

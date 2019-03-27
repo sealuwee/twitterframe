@@ -11,7 +11,7 @@
 
 ✅ Added a command that removes your Twitter API credentials file from your home directory.
 
-🔜 Open up the project on pypi.org so it can be 'pip-install-able'
+🔜 Open up project on pypi.org so it can be 'pip-install-able'
 
 🔜 Make some basic documentation on installation/usage.
 
@@ -29,8 +29,11 @@
 
 ❗️Scrape command is not scraping by specified user.
 
+❗️Scrape instead decides to scrape the tweets from the developer's timeline.
+
 ❗️Crawl command is not pulling tweets by the specified times.
 
+❗️Crawl gets a Twitter error response: status code = 429 due to the application's rate limit on the amount of requests to be served.
 
 ### Contributors with 💚
 
