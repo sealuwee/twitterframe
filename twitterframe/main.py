@@ -131,7 +131,9 @@ def reconfigure():
 @cli.command('verify')
 @click.help_option(help='Verify whether keys exist in the home directory.')
 def verify():
-
+    '''
+    Verify whether keys exist in the home directory.
+    '''
     home = Path(config_path).resolve()
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
@@ -177,7 +179,7 @@ def scrape():
 
 @cli.command('crawl')
 @click.argument('count', default=int(100), required=False)
-@click.help_option(help='Count is used as an argument to pass how many ')    
+@click.help_option(help='Count is used as an argument to pass how many ')
 def crawl(count):
     '''
     Crawl tweets by specified hashtag and dump into a .csv file.
@@ -199,7 +201,7 @@ def crawl(count):
     out = '{}_hashtags.csv'.format(hashtag)
 
     with open(out, 'w') as tw:
-        
+
         writer = csv.writer(tw)
         writer.writerow(['created_at', 'text'])
         writer.writerows(output_tweets)

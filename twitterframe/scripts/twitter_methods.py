@@ -9,6 +9,7 @@ import json
 import csv
 import os
 from pathlib import Path
+import logging
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -52,14 +53,19 @@ class TwitterWrapper(object):
 
         api = self.setup()
 
-        if api.verify_credentials() == True:
+        try:
+            api.verify_credentials()
             print(check, 'Credentials have been verified!')
             print(pidgeon, 'Enjoy using twitterframe.')
 
-        else:
+        # except RateLimitError as e:
+        #     raise APIQuotaError(e.args[0][0]['message'])
+        # except TweepError as e:
+        #     raise AuthenticationError(e.args[0][0]['message'])
+        #     print(w*3, 'Credentials are not valid.')
+        #     print(w*3, 'Please sign up for a developer account on developer.twitter.com')
+        except:
             print(w*3, 'Credentials are not valid.')
-            print(w*3, 'Please sign up for a developer account on developer.twitter.com')
-
 
     def get_timeline(self):
         '''
@@ -82,7 +88,7 @@ class TwitterWrapper(object):
             tweets.append([username, tweet.id_str, tweet.created_at,
                            tweet.text.encode('utf-8')])
 
-        print(pidgeon, 'Downloading {} tweets ...'.format(len(tweets)))
+        print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
 
         return tweets
 
@@ -105,7 +111,7 @@ class TwitterWrapper(object):
                            tweet.text.encode('utf-8')])
 
 
-        print(pidgeon, '{} Downloaded tweets, with tweetshe hashtag {}...'.format(len(tweets),hashtag))
+        print(pidgeon, '{} Downloaded tweets, with the hashtag {}...'.format(len(tweets),hashtag))
 
         return tweets
 
