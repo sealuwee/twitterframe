@@ -48,6 +48,17 @@ class TwitterWrapper(object):
 
         return api
 
+    def verify_creds(self):
+
+        api = self.setup()
+
+        if api.verify_credentials() == True:
+            print(check, 'Credentials have been verified!')
+            print(pidgeon, 'Enjoy using twitterframe.')
+
+        else:
+            print(w*3, 'Credentials are not valid.')
+            print(w*3, 'Please sign up for a developer account on developer.twitter.com')
     def get_timeline(self):
         '''
         https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline
