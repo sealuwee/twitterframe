@@ -1,6 +1,8 @@
 # twitterframe
 🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.
 
+
+
 # Progress so far...
 
 ✅ Users are able to create .json files to store their API keys.
@@ -13,7 +15,7 @@
 
 ✅ Scrape command is now functioning as it should be.
 
-🔜 Open up project on pypi.org so it can be 'pip-install-able'
+✅ Opened up project on pypi.org so it can be 'pip-install-able' [here](https://pypi.org/project/twitterframe/)
 
 🔜 Make some basic documentation on installation/usage.
 
