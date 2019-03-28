@@ -1,7 +1,8 @@
 # twitterframe
-🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.
 
+🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame content from Twitter as a CSV.
 
+In the future, I want to add more flexibility with the preferred output. (i.e. JSON, SQL databases, etc.)
 
 # Progress so far...
 
