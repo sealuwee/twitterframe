@@ -86,7 +86,7 @@ class TwitterWrapper(object):
 
         return tweets
 
-    def crawl(self, hashtag):
+    def crawl(self, hashtag, count):
         '''
             Crawl method for hashtags.
             This may not work yet lol.
@@ -99,13 +99,13 @@ class TwitterWrapper(object):
 
         for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
                                    lang='en',
-                                   ).items():
+                                   ).items(count):
 
             tweets.append([hashtag, tweet.id_str, tweet.created_at,
                            tweet.text.encode('utf-8')])
 
 
-        print(pidgeon, '{} Downloaded tweets, with the hashtag {}...'.format(len(tweets),hashtag))
+        print(pidgeon, '{} Downloaded tweets, with tweetshe hashtag {}...'.format(len(tweets),hashtag))
 
         return tweets
 

@@ -199,7 +199,7 @@ def crawl(count):
     out = '{}_hashtags.csv'.format(hashtag)
 
     with open(out, 'w') as tw:
-
+        
         writer = csv.writer(tw)
         writer.writerow(['created_at', 'text'])
         writer.writerows(output_tweets)
