@@ -115,6 +115,27 @@ class TwitterWrapper(object):
 
         return tweets
 
+    def listener():
+        '''
+            Stream listener for tweets by user.
+            Pretty sure this is not set up correctly yet.
+        '''
+        api = self.setup()
+
+        while True:
+
+            try:
+
+                stream = tweepy.Stream(auth=api.auth,
+                                       listener=StreamListener(api))
+                print(check, 'Listener has begun...')
+                stream.userstream()
+
+            except Exception as e:
+                print(e)
+                print(e.__doc__)
+
+
 
 
 
