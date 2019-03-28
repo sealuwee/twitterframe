@@ -23,7 +23,7 @@ class TwitterWrapper(object):
     '''
     subclass of SetupAPI
     TwitterTrends class.
-    Methods that I want to use:
+    Methods that I want to make in the future...:
     Get Twitter Trends by location
     Get top 10 Twitter Trends
     I guess just the get methods from the API, just as methods from this class...
@@ -59,6 +59,8 @@ class TwitterWrapper(object):
         else:
             print(w*3, 'Credentials are not valid.')
             print(w*3, 'Please sign up for a developer account on developer.twitter.com')
+
+
     def get_timeline(self):
         '''
         https://tweepy.readthedocs.io/en/v3.5.0/api.html#API.home_timeline

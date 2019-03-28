@@ -3,14 +3,6 @@ I believe I will be storing all of my commands here, and will be used to initial
 package.
 '''
 
-# replace all print in EVERY SCRIPT that uses CLICK with print
-# TODOs...
-# click.echo does not work.
-# Add progress bar to places.
-# make scripts for 'create_csv'
-# make scritps for basic twitter API usage, users, friends, etc.
-
-
 from .scripts.twitter_methods import TwitterWrapper
 from .scripts import utils
 import click
@@ -20,6 +12,7 @@ import json
 import csv
 import time
 
+# global variables
 # emojis go here
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -29,13 +22,8 @@ w = utils.warning
 check = utils.checkmark
 egg = utils.egg
 
-# global variables
-# default place to store keys ;)
-
 config_path = utils.config_path
-# create variable to store SetupAPI object
 
-# first time using click
 @click.group()
 @click.help_option(help='Call if you need help.')
 @click.version_option()
@@ -58,7 +46,6 @@ def setup():
     print(b, 'Setting up API...',b)
 
     home = Path(config_path)
-     # or Path('twitterframe.json').exists()
     if home.exists():
         print(w*3, 'Credentials file already exists.',w*3)
         return
@@ -92,10 +79,7 @@ def setup():
         }
 
     filename = Path(config_path)
-    print(filename)
-    # if '.json' not in filename.parts[-1]:
-    #     print(check, 'Made file extension as .json',check)
-    #     filename = filename.joinpath(filename.parts[-1]+'.json')
+
     tw = open(filename, 'w+')
     tw.write(json.dumps(keys))
     tw.close()
@@ -144,6 +128,17 @@ def reconfigure():
 
     return credentials
 
+@cli.command('verify')
+def verify():
+
+    home = Path(config_path).resolve()
+    credentials = reconfigure()
+    api = TwitterWrapper(*credentials.values())
+
+    print(egg, 'Verifying TwitterAPI credentials at : {}'.format(home))
+
+    api.verify_creds()
+
 @cli.command('scrape')
 # @click.option('--user', default='',
 #               help='Specify a user to scrape.')
@@ -157,7 +152,6 @@ def scrape():
     '''
 
     credentials = reconfigure()
-
     api = TwitterWrapper(*credentials.values())
 
     username = click.prompt(egg, 'Input Username ', prompt_suffix=': ')
