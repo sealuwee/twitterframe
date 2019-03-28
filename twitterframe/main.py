@@ -129,6 +129,7 @@ def reconfigure():
     return credentials
 
 @cli.command('verify')
+@click.help_option(help='Verify whether keys exist in the home directory.')
 def verify():
 
     home = Path(config_path).resolve()
@@ -175,14 +176,23 @@ def scrape():
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 @cli.command('crawl')
-@click.argument('hashtag', required=True)
-def crawl(hashtag):
+@click.argument('count', default=int(100), required=False)
+@click.help_option(help='Count is used as an argument to pass how many ')    
+def crawl(count):
     '''
     Crawl tweets by specified hashtag and dump into a .csv file.
     The file will be formatted as: 'hashtag_tweets.csv'.
     '''
+
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
+
+    hashtag = click.prompt(egg, 'Input Hashtag ', prompt_suffix=': #')
+
+    if hashtag == None:
+        print(w*3, 'Must specify a hashtag from twitter.com.')
+        print(egg, 'Some common hashtags include #fintech, #womenintech, #metoo, etc.', pidgeon)
+        return
 
     output_tweets = api.crawl(hashtag)
     time.sleep(1)
