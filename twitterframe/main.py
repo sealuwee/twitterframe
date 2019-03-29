@@ -196,7 +196,7 @@ def crawl(count):
         print(egg, 'Some common hashtags include #fintech, #womenintech, #metoo, etc.', pidgeon)
         return
 
-    output_tweets = api.crawl(hashtag)
+    output_tweets = api.crawl(hashtag,count)
     time.sleep(1)
     out = '{}_hashtags.csv'.format(hashtag)
 
