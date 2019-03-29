@@ -209,3 +209,10 @@ def crawl(count):
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
+@cli.command('listener')
+def listener():
+    '''
+    Stream listener used with Twitter API.
+    Not sure this works yet.
+    '''
+    pass
