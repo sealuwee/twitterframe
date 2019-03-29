@@ -10,6 +10,7 @@ import csv
 import os
 from pathlib import Path
 import logging
+import time
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -58,7 +59,7 @@ class TwitterWrapper(object):
             print(check, 'Credentials have been verified!')
             print(pidgeon, 'Enjoy using twitterframe.')
 
-       except:
+        except:
             print(w*3, 'Credentials are not valid.')
 
     def get_timeline(self):
@@ -114,6 +115,18 @@ class TwitterWrapper(object):
 
         return tweets
 
-
+    def limit_handle(self):
+        '''
+        Test for RateLimitError. Will remove in later version
+        TO BE DEPRECATED!
+        '''
+        api = self.setup()
+        while True:
+            try:
+                yield tweepy.Cursor().next()
+            except tweepy.RateLimitError:
+                n = 15
+                print('Sleeping for {} minutes.'.format(n))
+                time.sleep(n*60)
 
 
