@@ -212,7 +212,6 @@ def crawl(count):
 @cli.command('listener')
 def listener():
     '''
-    Stream listener used with Twitter API.
-    Not sure this works yet.
+    Stream listener used with Twitter API. DOES NOT WORK YET.
     '''
     pass
