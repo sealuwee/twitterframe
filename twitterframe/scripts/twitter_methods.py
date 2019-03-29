@@ -58,13 +58,7 @@ class TwitterWrapper(object):
             print(check, 'Credentials have been verified!')
             print(pidgeon, 'Enjoy using twitterframe.')
 
-        # except RateLimitError as e:
-        #     raise APIQuotaError(e.args[0][0]['message'])
-        # except TweepError as e:
-        #     raise AuthenticationError(e.args[0][0]['message'])
-        #     print(w*3, 'Credentials are not valid.')
-        #     print(w*3, 'Please sign up for a developer account on developer.twitter.com')
-        except:
+       except:
             print(w*3, 'Credentials are not valid.')
 
     def get_timeline(self):
@@ -103,38 +97,22 @@ class TwitterWrapper(object):
 
         tweets = []
 
-        for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                   lang='en',
-                                   ).items(count):
+        try:
 
-            tweets.append([hashtag, tweet.id_str, tweet.created_at,
-                           tweet.text.encode('utf-8')])
+            for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
+                                       count=count, lang='en',
+                                       ).items():
 
+                tweets.append([hashtag, tweet.id_str, tweet.created_at,
+                               tweet.text.encode('utf-8')])
 
-        print(pidgeon, '{} Downloaded tweets, with the hashtag {}...'.format(len(tweets),hashtag))
+        except tweepy.error.RateLimitError:
+
+            print(w*3, "Reached Twitter rate limit. Ending loop.")
+
+        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
 
         return tweets
-
-    def listener():
-        '''
-            Stream listener for tweets by user.
-            Pretty sure this is not set up correctly yet.
-        '''
-        api = self.setup()
-
-        while True:
-
-            try:
-
-                stream = tweepy.Stream(auth=api.auth,
-                                       listener=StreamListener(api))
-                print(check, 'Listener has begun...')
-                stream.userstream()
-
-            except Exception as e:
-                print(e)
-                print(e.__doc__)
-
 
 
 
