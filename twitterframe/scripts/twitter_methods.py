@@ -113,7 +113,7 @@ class TwitterWrapper(object):
 
         print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
 
-        return tweets
+        return get_user_tweets
 
     def limit_handle(self):
         '''
