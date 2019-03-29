@@ -129,3 +129,16 @@ class TwitterWrapper(object):
                 print('Sleeping for {} minutes.'.format(n))
                 time.sleep(n*60)
 
+class TFrameStreamListener(tweepy.StreamListener):
+    '''
+        Create a class that inherits StreamListener from tweepy.
+        Create a Stream object
+        Use api = self.setup() to set up authentication.
+    '''
+    def on_status(self, status):
+
+        print(status.text)
+
+
+
+
