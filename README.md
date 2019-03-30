@@ -42,6 +42,9 @@ In the future, I want to add more flexibility with the preferred output. (i.e. J
 💡 Add options/configurations to determine the output for exporting tweets from ```scrape```,
 ```crawl```, etc.
 
+💡 Create options for the output for each given command. (i.e. ```scrape``` would have the option to dump the tweets from user: @twitteruser, to either a CSV, an SQL database, etc.) (etc. is used quite liberally in my explanations of things in this README.)
+
+
 # Known issues
 
 ❗️ ```crawl``` command is not pulling tweets by the specified times.
