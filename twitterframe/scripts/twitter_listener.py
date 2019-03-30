@@ -12,13 +12,32 @@ import json
 import csv
 import sqlite3
 
+TwitterMethods = twitter_methods.TwitterMethods()
 
-class TwitterListener(tweepy.StreamListener):
+class StreamListener(tweepy.StreamListener):
+	'''
+		Stream Listener class. 
+	'''
+	def __init__(self):
+		super(tweepy.StreamListener, self).__init__()
+		pass
+
+	def on_status(self, status):
+		pass
+
+class TwitterListener(StreamListener, TwitterMethods):
     '''
         Create a class that inherits StreamListener from tweepy.
         Create a Stream object
         Use api = self.setup() to set up authentication.
     '''
+    def __init__(self):
+
+    	super(StreamListener, self).__init__()
+    	super(TwitterMethods, self).__init__()
+
+    	pass
+
     def on_status(self, status):
 
         print(status.text)
@@ -56,9 +75,4 @@ class TwitterListener(tweepy.StreamListener):
    		api = self.setup()
 
    		stream = tweepy.Stream(auth=api, listener=)
-class StreamListener(tweepy.StreamListener):
-	'''
-		Stream Listener class. 
-	'''
-
 
