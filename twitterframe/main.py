@@ -1,6 +1,7 @@
 '''
-I believe I will be storing all of my commands here, and will be used to initialize the
-package.
+All of the commands will be stored here.
+The code will look pretty messy, since we're storing all of the commands in 
+this main.py file until we learn how to deploy on Flask.
 '''
 
 from .scripts.twitter_methods import TwitterWrapper
@@ -157,7 +158,7 @@ def scrape():
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
 
-    username = click.prompt(egg, 'Input Username ', prompt_suffix=': ')
+    username = click.prompt(egg, 'Input Username ', prompt_suffix=': @')
 
     if username == None:
         print(w*3,'Must specify a username from twitter.com')
@@ -215,3 +216,5 @@ def listener():
     Stream listener used with Twitter API. DOES NOT WORK YET.
     '''
     pass
+
+
