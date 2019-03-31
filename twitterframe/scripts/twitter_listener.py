@@ -60,9 +60,9 @@ class TwitterListener(StreamListener, TwitterMethods):
 
     	super(StreamListener, self).__init__()
     	super(TwitterMethods, self).__init__()
-    	
-    	self.api = self.TwitterMethods().setup()
-    	
+
+    	self.api = api
+
     def set_endpoint(self, endpoint):
     	'''
     		Sets endpoints

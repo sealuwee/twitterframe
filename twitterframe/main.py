@@ -215,6 +215,9 @@ def listener():
     '''
     Stream listener used with Twitter API. DOES NOT WORK YET.
     '''
+
+    api = TwitterWrapper(*credential.values()) 
+    listener = TwitterListener(api=api)
     pass
 
 
