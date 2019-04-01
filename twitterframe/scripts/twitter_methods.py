@@ -99,7 +99,7 @@ class TwitterWrapper(object):
             print(w, "Reached Twitter rate limit. Ending loop.")
             print(w, twrle)
 
-        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
+        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),username))
  
         return tweets
 
