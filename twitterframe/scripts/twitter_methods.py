@@ -79,8 +79,9 @@ class TwitterWrapper(object):
         try: 
             tweets = []
             user_tweets = tweepy.Cursor(api.user_timeline, id=username,
-                                   ).items(limit)
-            p_bar = tqdm(user_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(username))
+                                       ).items(limit)
+            p_bar = tqdm(user_tweets, ascii=False, total=limit, desc='Harvesting Tweets from user: {}'.format(username),
+                         unit=' tweets', )
 
             for i, tweet in enumerate(p_bar):
                 p_bar.update(1)
@@ -125,7 +126,8 @@ class TwitterWrapper(object):
 
             print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
             
-            p_bar = tqdm(hashtag_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(hashtag))
+            p_bar = tqdm(hashtag_tweets, ascii=False, total=limit, desc='Harvesting Tweets from user: {}'.format(hashtag),
+                         unit=' tweets')
 
             for count, tweet in hashtag_tweets:
                 p_bar.update(1)
@@ -139,7 +141,7 @@ class TwitterWrapper(object):
             print(w,twerp)
 
         except tweepy.error.RateLimitError as twrle:
-            print(w, "Reached Twitter rate limit. Ending loop.")
+            print(w, "Reached Twitter rate limit. Enjoyding loop.")
             print(w, twrle)
 
         print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
