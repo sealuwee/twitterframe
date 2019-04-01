@@ -37,7 +37,7 @@ def cli():
 
     Documentation coming soon! Along with more commands and options!
     '''
-    pass
+    pass    
 
 @cli.command('setup')
 def setup():
@@ -117,7 +117,7 @@ def reconfigure():
     '''
     reconfig: opens path to config where keys are stored.
     '''
-    print(b, 'Checking credentials for API...', b)
+    print(egg, 'Checking credentials for API...', egg)
 
     home = Path(config_path)
     if not home.exists():
@@ -127,6 +127,7 @@ def reconfigure():
     with open(config_path) as creds:
         credentials = json.loads(creds.read())
 
+    print(b, 'Credentials are good to go!', b)
     return credentials
 
 @cli.command('verify')
@@ -211,13 +212,20 @@ def crawl(count):
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 @cli.command('listener')
-def listener():
+@click.option('--hashtag', 
+              help='Option to track by hashtag.')
+@click.option('--user',
+              help='Option ot track by user.')
+def listener(hashtag,user):
     '''
-    Stream listener used with Twitter API. DOES NOT WORK YET.
+    Starts the Stream Listener used with Twitter API. 
+    https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html#
+    DOES NOT WORK YET.
     '''
 
     api = TwitterWrapper(*credential.values()) 
     listener = TwitterListener(api=api)
-    pass
+
+    
 
 

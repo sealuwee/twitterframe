@@ -19,8 +19,6 @@ import json
 import csv
 import sqlite3
 
-TwitterMethods = twitter_methods.TwitterMethods()
-
 class StreamListener(tweepy.StreamListener):
 	'''
 		Stream Listener class. 
@@ -50,11 +48,19 @@ class StreamListener(tweepy.StreamListener):
    		elif data.get('event','') == 'follow':
    			return self.endpoint.process_new_follower(data['source'])
 
+# global variables
+stream_listener = StreamListener()
+TwitterMethods = twitter_methods.TwitterMethods()
+
 class TwitterListener(StreamListener, TwitterMethods):
     '''
         Create a class that inherits StreamListener from tweepy.
         Create a Stream object
         Use api = self.setup() to set up authentication.
+        I guess the goal will be to also dump the tweets from each listening session
+        into an SQL database...
+        example code can be found here:
+        https://github.com/dataquestio/twitter-scrape/blob/master/scraper.py
     '''
     def __init__(self,api):
 
@@ -70,11 +76,13 @@ class TwitterListener(StreamListener, TwitterMethods):
     	self.endpoint = endpoint
 
 
-   	def use_filter(self, tracker):
+   	def use_filter(self, trackers=list():
    		'''
    			Filter to track what you want to stream.
    		'''
    		api = self.setup()
 
-   		stream = tweepy.Stream(auth=api, listener=)
+   		stream = tweepy.Stream(auth=api, listener=StreamListener())
+   		stream.filter(track=trackers)
+
 
