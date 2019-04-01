@@ -77,23 +77,30 @@ class TwitterWrapper(object):
         api = self.setup()
 
         try: 
-
             tweets = []
-
             user_tweets = tweepy.Cursor(api.user_timeline, id=username,
                                    ).items(limit)
             p_bar = tqdm(user_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(username))
 
-            for tweet in enumerate(p_bar):
+            for i, tweet in enumerate(p_bar):
 
                 p_bar.update(1)
-                if cnt > limit:
+                if i > limit:
                     break
                 tweets.append([username, tweet.id_str, tweet.created_at,
                                tweet.text.encode('utf-8')])
 
             print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
 
+        except tweepy.error.TweepError as twerp:
+            print(w,twerp)
+
+        except tweepy.error.RateLimitError as twrle:
+            print(w, "Reached Twitter rate limit. Ending loop.")
+            print(w, twrle)
+
+        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
+ 
         return tweets
 
     def crawl(self, hashtag, count, limit=50000):
