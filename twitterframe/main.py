@@ -205,7 +205,7 @@ def crawl(count):
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['created_at', 'text'])
+        writer.writerow(['id', 'created_at', 'text'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()
@@ -225,7 +225,5 @@ def listener(hashtag,user):
 
     api = TwitterWrapper(*credential.values()) 
     listener = TwitterListener(api=api)
-
-    
 
 

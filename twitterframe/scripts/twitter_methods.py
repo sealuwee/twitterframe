@@ -11,6 +11,7 @@ import os
 from pathlib import Path
 import logging
 import time
+from tqdm import tqdm
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -68,28 +69,38 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_user_tweets(self, username):
+    def get_user_tweets(self, username, limit=50000):
         '''
            Get tweets by username with the tweepy.API method --> user_timeline.
            This works.
         '''
         api = self.setup()
 
-        tweets = []
+        try: 
 
-        for tweet in tweepy.Cursor(api.user_timeline, id=username,
-                                   ).items():
+            tweets = []
 
-            tweets.append([username, tweet.id_str, tweet.created_at,
-                           tweet.text.encode('utf-8')])
+            user_tweets = tweepy.Cursor(api.user_timeline, id=username,
+                                   ).items(limit)
+            p_bar = tqdm(user_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(username))
 
-        print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
+            for tweet in enumerate(p_bar):
+
+                p_bar.update(1)
+                if cnt > limit:
+                    break
+                tweets.append([username, tweet.id_str, tweet.created_at,
+                               tweet.text.encode('utf-8')])
+
+            print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
 
         return tweets
 
-    def crawl(self, hashtag, count):
+    def crawl(self, hashtag, count, limit=50000):
         '''
             Crawl method for hashtags.
+            :hashtag: we want to be able to pass a list of hashtags here.
+            :count: count is the passed parameter for the amount of tweets collected.
             This may not work yet lol.
             Will push to pypi.org when this is done.
             since='{}'.format(time) <-- removed this from api.search.
@@ -100,20 +111,28 @@ class TwitterWrapper(object):
 
         try:
 
-            for tweet in tweepy.Cursor(api.search, q='{}'.format(hashtag),
-                                       count=count, lang='en',
-                                       ).items():
+            print(h, 'Collecting tweets from {}'.format(hashtag), pidgeon)
+
+            for tweet in tweepy.Cursor(api.search, q=hashtag,
+                                       rpp=count, result_type='recent',
+                                       include_entities=True, 
+                                       exclude_replies=True,
+                                       lang='en',
+                                       ).items(limit):
 
                 tweets.append([hashtag, tweet.id_str, tweet.created_at,
                                tweet.text.encode('utf-8')])
 
-        except tweepy.error.RateLimitError:
+        except tweepy.error.TweepError as twerp:
+            print(w,twerp)
 
-            print(w*3, "Reached Twitter rate limit. Ending loop.")
+        except tweepy.error.RateLimitError as twrle:
+            print(w, "Reached Twitter rate limit. Ending loop.")
+            print(w, twrle)
 
         print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
 
-        return get_user_tweets
+        return tweets
 
     def limit_handle(self):
         '''
