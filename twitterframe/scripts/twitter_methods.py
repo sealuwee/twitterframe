@@ -83,10 +83,10 @@ class TwitterWrapper(object):
             p_bar = tqdm(user_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(username))
 
             for i, tweet in enumerate(p_bar):
-
                 p_bar.update(1)
                 if i > limit:
                     break
+
                 tweets.append([username, tweet.id_str, tweet.created_at,
                                tweet.text.encode('utf-8')])
 
@@ -99,7 +99,7 @@ class TwitterWrapper(object):
             print(w, "Reached Twitter rate limit. Ending loop.")
             print(w, twrle)
 
-        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),username))
+        print(pidgeon, '{} Downloaded tweets from user: {} !'.format(len(tweets),username))
  
         return tweets
 
@@ -114,18 +114,23 @@ class TwitterWrapper(object):
         '''
         api = self.setup()
 
-        tweets = []
-
         try:
-
-            print(h, 'Collecting tweets from {}'.format(hashtag), pidgeon)
-
-            for tweet in tweepy.Cursor(api.search, q=hashtag,
+            tweets = []
+            hashtag_tweets = tweepy.Cursor(api.search, q=hashtag,
                                        rpp=count, result_type='recent',
                                        include_entities=True, 
                                        exclude_replies=True,
                                        lang='en',
-                                       ).items(limit):
+                                       ).items(limit)
+
+            print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
+            
+            p_bar = tqdm(hashtag_tweets, ascii=True, total=limit, desc='Harvesting Tweets from user: {}'.format(hashtag))
+
+            for count, tweet in hashtag_tweets:
+                p_bar.update(1)
+                if count > limit:
+                    break
 
                 tweets.append([hashtag, tweet.id_str, tweet.created_at,
                                tweet.text.encode('utf-8')])
