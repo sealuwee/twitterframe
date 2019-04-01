@@ -89,7 +89,13 @@ class TwitterWrapper(object):
                     break
 
                 tweets.append([username, tweet.id_str, tweet.created_at,
-                               tweet.text.encode('utf-8')])
+                               tweet.text.encode('utf-8'), tweet.is_quote_status, 
+                               tweet.quoted_status, tweet.quote_count, tweet.reply_count, 
+                               tweet.favorite_count, tweet.favorited,
+                               tweet.retweet_count, tweet.retweeted, tweet.retweeted_status, 
+                               tweet.possibly_sensitive, tweet.filter_level,
+                               tweet.entities, tweet.entities.hashtags.text,
+                               ])
 
             print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
 
