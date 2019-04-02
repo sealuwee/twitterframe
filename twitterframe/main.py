@@ -173,7 +173,20 @@ def scrape():
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text'])
+        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
+                         'quote_count', 'reply_count', 'favorite_count',
+                         'favorited', 'retweet_count', 'retweeted',
+                         'possibly_sensitive', 'filter_level', 
+                         'entities_hashtags_text', 'entities_urls_expanded_url',
+                         'entities_urls_description', 'entities_urls_title',
+                         'entities_media_expanded_url', 'entities_media_media_type',
+                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
+                         'entities_user_mentions_id', 'entities_symbols_text', 
+                         'user_id', 'user_name', 'user_screen_name', 'user_location',
+                         'user_description', 'user_verified', 'user_protected', 
+                         'user_followers_count', 'user_friends_count', 'user_listed_count',
+                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
+                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()
@@ -205,7 +218,20 @@ def crawl(count):
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text'])
+        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
+                         'quote_count', 'reply_count', 'favorite_count',
+                         'favorited', 'retweet_count', 'retweeted',
+                         'possibly_sensitive', 'filter_level', 
+                         'entities_hashtags_text', 'entities_urls_expanded_url',
+                         'entities_urls_description', 'entities_urls_title',
+                         'entities_media_expanded_url', 'entities_media_media_type',
+                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
+                         'entities_user_mentions_id', 'entities_symbols_text', 
+                         'user_id', 'user_name', 'user_screen_name', 'user_location',
+                         'user_description', 'user_verified', 'user_protected', 
+                         'user_followers_count', 'user_friends_count', 'user_listed_count',
+                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
+                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()

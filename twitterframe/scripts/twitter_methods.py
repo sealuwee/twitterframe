@@ -102,7 +102,7 @@ class TwitterWrapper(object):
                                tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
                                tweet.user.location, tweet.user.description, 
                                tweet.user.verified, tweet.user.protected, 
-                               tweet.user.followers_count, tweet.user.followers_count, 
+                               tweet.user.followers_count, tweet.user.friends_count, 
                                tweet.user.listed_count, tweet.user.favourites_count,
                                tweet.user.statuses_count, tweet.user.created_at,
                                tweet.user.geo_enabled, tweet.user.default_profile,
@@ -166,7 +166,7 @@ class TwitterWrapper(object):
                             tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
                             tweet.user.location, tweet.user.description, 
                             tweet.user.verified, tweet.user.protected, 
-                            tweet.user.followers_count, tweet.user.followers_count, 
+                            tweet.user.followers_count, tweet.user.friends_count, 
                             tweet.user.listed_count, tweet.user.favourites_count,
                             tweet.user.statuses_count, tweet.user.created_at,
                             tweet.user.geo_enabled, tweet.user.default_profile,
@@ -209,8 +209,9 @@ class TwitterWrapper(object):
 
                 followers.append([follower.user.id_str, follower.user.name, follower.user.screen_name,
                                 follower.user.location, follower.user.created_at, follower.user.followers_count,
-                                follower.user.followers_count, follower.user.verified, follower.user.protected,
-                                follower.user.statuses_count, follower.user.default_profile, follower.user.default_profile_image])
+                                follower.user.friends_count, follower.user.verified, follower.user.protected,
+                                follower.user.statuses_count, follower.user.default_profile, 
+                                follower.user.default_profile_image])
 
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
