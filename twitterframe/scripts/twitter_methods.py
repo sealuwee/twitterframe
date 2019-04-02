@@ -89,8 +89,7 @@ class TwitterWrapper(object):
                     break
 
                 tweets.append([username, tweet.id_str, tweet.created_at,
-                               tweet.text.encode('utf-8'), tweet.is_quote_status, 
-                               tweet.quote_count, tweet.reply_count, 
+                               tweet.text.encode('utf-8'), tweet.is_quote_status,
                                tweet.favorite_count, tweet.favorited,
                                tweet.retweet_count, tweet.retweeted, 
                                tweet.possibly_sensitive, tweet.filter_level,
@@ -154,8 +153,7 @@ class TwitterWrapper(object):
 
                 tweets.append([hashtag, tweet.id_str, tweet.created_at,
                             tweet.text.encode('utf-8'), tweet.is_quote_status, 
-                            tweet.quoted_status, tweet.quote_count, tweet.reply_count, 
-                            tweet.favorite_count, tweet.favorited,
+                            tweet.quoted_status, tweet.favorite_count, tweet.favorited,
                             tweet.retweet_count, tweet.retweeted, tweet.retweeted_status, 
                             tweet.possibly_sensitive, tweet.filter_level,
                             tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
