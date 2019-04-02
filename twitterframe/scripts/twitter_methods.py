@@ -94,7 +94,11 @@ class TwitterWrapper(object):
                                tweet.favorite_count, tweet.favorited,
                                tweet.retweet_count, tweet.retweeted, tweet.retweeted_status, 
                                tweet.possibly_sensitive, tweet.filter_level,
-                               tweet.entities, tweet.entities.hashtags.text,
+                               tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
+                               tweet.entities.urls.description, tweet.entities.urls.title,
+                               tweet.entities.media.expanded_url, tweet.entities.media.media_type,
+                               tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
+                               tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8')
                                ])
 
             print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
@@ -141,7 +145,16 @@ class TwitterWrapper(object):
                     break
 
                 tweets.append([hashtag, tweet.id_str, tweet.created_at,
-                               tweet.text.encode('utf-8')])
+                               tweet.text.encode('utf-8'), tweet.is_quote_status, 
+                               tweet.quoted_status, tweet.quote_count, tweet.reply_count, 
+                               tweet.favorite_count, tweet.favorited,
+                               tweet.retweet_count, tweet.retweeted, tweet.retweeted_status, 
+                               tweet.possibly_sensitive, tweet.filter_level,
+                               tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
+                               tweet.entities.urls.description, tweet.entities.urls.title,
+                               tweet.entities.media.expanded_url, tweet.entities.media.media_type,
+                               tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
+                               tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8')])
 
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
