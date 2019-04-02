@@ -211,6 +211,20 @@ def crawl(count):
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
+@cli.command('corral')
+def corral():
+    '''
+    Corral the sheep by the user of choice.
+    Corral is meant to gather data from each user object in a list of twitter users
+    who follow one particular user.
+    '''
+
+    credentials = reconfigure()
+    api = TwitterWrapper(*credentials.values())
+
+    sheep_herder = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': #')
+
+
 @cli.command('listener')
 @click.option('--hashtag', 
               help='Option to track by hashtag.')
@@ -223,9 +237,10 @@ def listener(hashtag,user):
     DOES NOT WORK YET.
     '''
 
+    credentials = reconfigure()
     api = TwitterWrapper(*credential.values()) 
     listener = TwitterListener(api=api)
 
-    
+
 
 
