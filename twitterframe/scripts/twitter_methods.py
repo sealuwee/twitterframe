@@ -184,6 +184,22 @@ class TwitterWrapper(object):
 
         return tweets
 
+    def get_friends_list(self, username):
+        '''
+            gather a list of IDs of the users that a particular user follows.
+            :username: input username from command line.
+        '''
+
+        api = self.setup()
+
+        try:
+            #something I don't have many of.. :(
+            friends = []
+            print(egg, 'Collecting list of friends...')
+
+            find_friends = tweepy.Cursor(api.friends_ids, id=username).items()
+
+
     def limit_handle(self):
         '''
         Test for RateLimitError. Will remove in later version
