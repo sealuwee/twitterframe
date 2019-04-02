@@ -102,7 +102,7 @@ class TwitterWrapper(object):
                                tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
                                tweet.user.location, tweet.user.description, 
                                tweet.user.verified, tweet.user.protected, 
-                               tweet.user.followers_count, tweet.user.friends_count, 
+                               tweet.user.followers_count, tweet.user.followers_count, 
                                tweet.user.listed_count, tweet.user.favourites_count,
                                tweet.user.statuses_count, tweet.user.created_at,
                                tweet.user.geo_enabled, tweet.user.default_profile,
@@ -166,7 +166,7 @@ class TwitterWrapper(object):
                             tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
                             tweet.user.location, tweet.user.description, 
                             tweet.user.verified, tweet.user.protected, 
-                            tweet.user.followers_count, tweet.user.friends_count, 
+                            tweet.user.followers_count, tweet.user.followers_count, 
                             tweet.user.listed_count, tweet.user.favourites_count,
                             tweet.user.statuses_count, tweet.user.created_at,
                             tweet.user.geo_enabled, tweet.user.default_profile,
@@ -184,25 +184,33 @@ class TwitterWrapper(object):
 
         return tweets
 
-    def get_friends_list(self, username):
+    def get_followers(self, username):
         '''
-            Gather a list of IDs of the users that a particular user follows.
+            Gather a list of followers for a specified user..
             :username: input username from command line.
 
-            returns: list of IDs of friends.
+            returns: data from each user that followers :username:.
         '''
 
         api = self.setup()
 
         try:
             #something I don't have many of.. :(
-            friends = []
-            print(egg, 'Collecting list of friends...')
+            followers = []
+            print(egg, 'Collecting list of followers...')
 
-            find_friends = tweepy.Cursor(api.friends_ids, id=username).items()
+            find_followers = tweepy.Cursor(api.followers, id=username, cursor=-1).items()
 
-            p_bar = tqdm(find_friends, ascii=False, desc='Harvesting Tweets from ')
-            for count, friend in enumerate(p_bar)
+            p_bar = tqdm(find_followers, ascii=False, desc='Harvesting the IDs of who {} follows!'.format(username))
+
+            for follower in enumerate(p_bar):
+
+                p_bar.update(1)
+
+                followers.append([follower.user.id_str, follower.user.name, follower.user.screen_name,
+                                follower.user.location, follower.user.created_at, follower.user.followers_count,
+                                follower.user.followers_count, follower.user.verified, follower.user.protected,
+                                follower.user.statuses_count, follower.user.default_profile, follower.user.default_profile_image])
 
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
@@ -211,10 +219,10 @@ class TwitterWrapper(object):
             print(w, "Reached Twitter rate limit. Enjoyding loop.")
             print(w, twrle)
 
-        print(pidgeon, '{} has {} people they are following !'.format(username,len(friends)))
+        print(pidgeon, '{} people and robots are following {} !'.format(len(followers), username))
 
         #something I wish I could do.
-        return friends
+        return followers
 
     def limit_handle(self):
         '''
