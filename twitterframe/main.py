@@ -22,6 +22,7 @@ pidgeon = utils.pidgeon
 w = utils.warning
 check = utils.checkmark
 egg = utils.egg
+sheep = utils.sheep
 
 config_path = utils.config_path
 
@@ -265,7 +266,7 @@ def corral():
                          'user_location', 'user_created_at', 'user_followers_count',
                          'user_friends_count', 'user_verified', 'user_protected',
                          'user_statuses_count', 'user_default_profile', 'user_default_profile_image'])
-    
+
         writer.writerows(output_followers)
 
     out_path = Path(out).resolve()
