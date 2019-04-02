@@ -98,7 +98,7 @@ class TwitterWrapper(object):
                                tweet.entities.urls.description, tweet.entities.urls.title,
                                tweet.entities.media.expanded_url, tweet.entities.media.media_type,
                                tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
-                               tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8')
+                               tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8'),
                                tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
                                tweet.user.location, tweet.user.description, 
                                tweet.user.verified, tweet.user.protected, 
