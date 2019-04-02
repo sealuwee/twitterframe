@@ -261,7 +261,11 @@ def corral():
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text'])
+        writer.writerow(['user_id', 'user_name', 'user_screen_name',
+                         'user_location', 'user_created_at', 'user_followers_count',
+                         'user_friends_count', 'user_verified', 'user_protected',
+                         'user_statuses_count', 'user_default_profile', 'user_default_profile_image'])
+    
         writer.writerows(output_followers)
 
     out_path = Path(out).resolve()
