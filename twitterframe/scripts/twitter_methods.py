@@ -144,7 +144,7 @@ class TwitterWrapper(object):
 
             print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
             
-            p_bar = tqdm(hashtag_tweets, ascii=False, total=limit, desc='Harvesting Tweets from user: {}'.format(hashtag),
+            p_bar = tqdm(hashtag_tweets, ascii=False, total=limit, desc='Harvesting Tweets from hashtag: {}'.format(hashtag),
                          unit=' tweets')
 
             for count, tweet in hashtag_tweets:
@@ -186,8 +186,10 @@ class TwitterWrapper(object):
 
     def get_friends_list(self, username):
         '''
-            gather a list of IDs of the users that a particular user follows.
+            Gather a list of IDs of the users that a particular user follows.
             :username: input username from command line.
+
+            returns: list of IDs of friends.
         '''
 
         api = self.setup()
@@ -199,6 +201,20 @@ class TwitterWrapper(object):
 
             find_friends = tweepy.Cursor(api.friends_ids, id=username).items()
 
+            p_bar = tqdm(find_friends, ascii=False, desc='Harvesting Tweets from ')
+            for count, friend in enumerate(p_bar)
+
+        except tweepy.error.TweepError as twerp:
+            print(w,twerp)
+
+        except tweepy.error.RateLimitError as twrle:
+            print(w, "Reached Twitter rate limit. Enjoyding loop.")
+            print(w, twrle)
+
+        print(pidgeon, '{} has {} people they are following !'.format(username,len(friends)))
+
+        #something I wish I could do.
+        return friends
 
     def limit_handle(self):
         '''
