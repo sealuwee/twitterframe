@@ -223,7 +223,23 @@ def corral():
     api = TwitterWrapper(*credentials.values())
 
     sheep_herder = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': #')
-    
+
+    if sheep_herder == None:
+        print(w,sheep, 'You can\'t corral any sheep without providing a name for the herder...')
+        print(sheep, 'If you need some help, the master herder is none other than realDonaldTrump')
+
+    output_followers = api.get_followers(username)
+    time.sleep(1)
+    out = '{}_followers.csv'.format(username)
+
+    with open(out, 'w') as tw:
+
+        writer = csv.writer(tw)
+        writer.writerow(['id', 'created_at', 'text'])
+        writer.writerows(output_followers)
+
+    out_path = Path(out).resolve()
+    print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 
 @cli.command('listener')
