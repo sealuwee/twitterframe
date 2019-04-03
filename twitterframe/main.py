@@ -1,4 +1,4 @@
-    '''
+'''
 All of the commands will be stored here.
 The code will look pretty messy, since we're storing all of the commands in 
 this main.py file until we learn how to deploy on Flask.
@@ -175,8 +175,7 @@ def scrape():
 
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
-                         'quote_count', 'reply_count', 'favorite_count',
-                         'favorited', 'retweet_count', 'retweeted',
+                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
                          'possibly_sensitive', 'filter_level', 
                          'entities_hashtags_text', 'entities_urls_expanded_url',
                          'entities_urls_description', 'entities_urls_title',
@@ -220,8 +219,7 @@ def crawl(count):
 
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
-                         'quote_count', 'reply_count', 'favorite_count',
-                         'favorited', 'retweet_count', 'retweeted',
+                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
                          'possibly_sensitive', 'filter_level', 
                          'entities_hashtags_text', 'entities_urls_expanded_url',
                          'entities_urls_description', 'entities_urls_title',

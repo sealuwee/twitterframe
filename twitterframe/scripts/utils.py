@@ -24,6 +24,7 @@ warning = bytes.decode(b'\xE2\x9D\x97', 'utf-8')
 item = u"\U0001F95A"
 egg_encode = item.encode('utf-8')
 egg = bytes.decode(egg_encode, 'utf-8')
+sheep = bytes.decode(b'\xF0\x9F\x90\x91', 'utf-8')
 
 # Paths
 config_path = Path(os.environ['HOME']+'/.twitterframe')
