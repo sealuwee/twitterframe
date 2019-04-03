@@ -145,13 +145,13 @@ def verify():
 
     api.verify_creds()
 
-@cli.command('scrape')
+@cli.command('scrapelite')
 # @click.option('--user', default='',
 #               help='Specify a user to scrape.')
 # @click.option('--out', default='tweets.csv',
 #               help='Specify filename for csv.')
 # @click.argument('username', required=True)
-def scrape():
+def scrapelite():
     '''
     Scrape tweets from a specified user and dump into a .csv file.
     The file will be formatted as: 'username_tweets.csv'.
@@ -176,21 +176,15 @@ def scrape():
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
                          'favorite_count', 'favorited', 'retweet_count', 'retweeted',
-                         'possibly_sensitive', 'filter_level', 
-                         'entities_hashtags_text', 'entities_urls_expanded_url',
-                         'entities_urls_description', 'entities_urls_title',
-                         'entities_media_expanded_url', 'entities_media_media_type',
-                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
-                         'entities_user_mentions_id', 'entities_symbols_text', 
-                         'user_id', 'user_name', 'user_screen_name', 'user_location',
-                         'user_description', 'user_verified', 'user_protected', 
-                         'user_followers_count', 'user_friends_count', 'user_listed_count',
-                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
-                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
+                         'possibly_sensitive'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
+
+@cli.command('scrape')
+def scrape():
+    pass
 
 @cli.command('crawl')
 @click.argument('count', default=int(100), required=False)

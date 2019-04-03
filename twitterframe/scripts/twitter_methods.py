@@ -92,7 +92,40 @@ class TwitterWrapper(object):
                                tweet.text.encode('utf-8'), tweet.is_quote_status,
                                tweet.favorite_count, tweet.favorited,
                                tweet.retweet_count, tweet.retweeted, 
-                               tweet.possibly_sensitive, tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
+                               tweet.possibly_sensitive 
+                               ])
+
+            print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
+
+        except tweepy.error.TweepError as twerp:
+            print(w,twerp)
+
+        except tweepy.error.RateLimitError as twrle:
+            print(w, "Reached Twitter rate limit. Ending loop.")
+            print(w, twrle)
+ 
+        return tweets
+
+    def get_status_objects(self, username):
+        '''
+        Highly recommended to use this if you want to pull ALL objects, 
+        including entities.
+        '''
+        api = self.setup()
+
+        try: 
+            tweets = []
+            statuses = tweepy.Cursor(api.user_statuses, id=username,
+                                     include_entites=True).items()
+            p_bar = tqdm(user_tweets, ascii=False, desc='Harvesting Data from user: {}'.format(username))
+
+            for i, tweet in enumerate(p_bar):
+                p_bar.update(1)
+                if i > limit:
+                    break
+
+                tweets.append([username, tweet.id_str, tweet.create_at, tweet.text.encode('utf-8')
+                               tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
                                tweet.entities.urls.description, tweet.entities.urls.title,
                                tweet.entities.media.expanded_url, tweet.entities.media.media_type,
                                tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
@@ -104,11 +137,9 @@ class TwitterWrapper(object):
                                tweet.user.listed_count, tweet.user.favourites_count,
                                tweet.user.statuses_count, tweet.user.created_at,
                                tweet.user.geo_enabled, tweet.user.default_profile,
-                               tweet.user.default_profile_image 
-                               ])
+                               tweet.user.default_profile_image])
 
-            print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
-
+            print(pidgeon, 'Downloaded {} tweets from {} during this request.'.format(len(tweets),username))
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
 
@@ -116,8 +147,6 @@ class TwitterWrapper(object):
             print(w, "Reached Twitter rate limit. Ending loop.")
             print(w, twrle)
 
-        print(pidgeon, '{} Downloaded tweets from user: {} !'.format(len(tweets),username))
- 
         return tweets
 
     def crawl(self, hashtag, count, limit=50000):
@@ -169,14 +198,14 @@ class TwitterWrapper(object):
                                 tweet.user.default_profile_image 
                                ])
 
+            print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
+
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
 
         except tweepy.error.RateLimitError as twrle:
             print(w, "Reached Twitter rate limit. Enjoyding loop.")
             print(w, twrle)
-
-        print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
 
         return tweets
 
