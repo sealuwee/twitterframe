@@ -251,7 +251,7 @@ def corral():
 
     if sheep_herder == None:
         print(w,sheep, 'You can\'t corral any sheep without providing a name for the herder...')
-        print(sheep, 'If you need some help, the master herder is none other than realDonaldTrump')
+        print(w,sheep, 'If you need some help, just type any valid username on Twitter.')
 
     output_followers = api.get_followers(username)
     time.sleep(1)
