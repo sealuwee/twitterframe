@@ -126,7 +126,7 @@ class TwitterWrapper(object):
                 if i > limit:
                     break
 
-                tweets.append([username, tweet.id_str, tweet.create_at, tweet.text.encode('utf-8')
+                tweets.append([username, tweet.id_str, tweet.create_at, tweet.text.encode('utf-8'),
                                tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
                                tweet.entities.urls.description, tweet.entities.urls.title,
                                tweet.entities.media.expanded_url, tweet.entities.media.media_type,
@@ -166,8 +166,7 @@ class TwitterWrapper(object):
             tweets = []
             hashtag_tweets = tweepy.Cursor(api.search, q=hashtag,
                                        rpp=count, result_type='recent',
-                                       include_entities=True, 
-                                       exclude_replies=True,
+                                       include_entities=True,
                                        lang='en',
                                        ).items(limit)
 
