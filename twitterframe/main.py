@@ -154,7 +154,7 @@ def verify():
 def scrapelite():
     '''
     Scrape tweets from a specified user and dump into a .csv file.
-    The file will be formatted as: 'username_tweets.csv'.
+    The file will be formatted as: 'username_lite_tweets.csv'.
     '''
 
     credentials = reconfigure()
@@ -169,7 +169,7 @@ def scrapelite():
     print(check, 'Beginning to scrape user: {}'.format(username))
     output_tweets = api.get_user_tweets(username)
     time.sleep(1)
-    out = '{}_tweets.csv'.format(username)
+    out = '{}_lite_tweets.csv'.format(username)
 
     with open(out, 'w') as tw:
 
@@ -184,7 +184,43 @@ def scrapelite():
 
 @cli.command('scrape')
 def scrape():
-    pass
+    '''
+    Scrape tweets and more with the full scrape function. 
+    '''
+    credentials = reconfigure()
+    api = TwitterWrapper(*credentials.values())
+
+    username = click.prompt(egg, 'Input Username ', prompt_suffix=': @')
+
+    if username == None:
+        print(w*3,'Must specify a username from twitter.com')
+        return
+
+    print(check, 'Beginning to scrape user: {}'.format(username))
+    output_tweets = api.get_status_objects(username)
+    time.sleep(1)
+    out = '{}_tweets.csv'.format(username)
+
+    with open(out, 'w') as tw:
+
+        writer = csv.writer(tw)
+        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
+                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
+                         'possibly_sensitive', 'filter_level', 
+                         'entities_hashtags_text', 'entities_urls_expanded_url',
+                         'entities_urls_description', 'entities_urls_title',
+                         'entities_media_expanded_url', 'entities_media_media_type',
+                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
+                         'entities_user_mentions_id', 'entities_symbols_text', 
+                         'user_id', 'user_name', 'user_screen_name', 'user_location',
+                         'user_description', 'user_verified', 'user_protected', 
+                         'user_followers_count', 'user_friends_count', 'user_listed_count',
+                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
+                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
+        writer.writerows(output_tweets)
+
+    out_path = Path(out).resolve()
+    print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 @cli.command('crawl')
 @click.argument('count', default=int(100), required=False)
