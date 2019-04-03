@@ -247,9 +247,9 @@ def corral():
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
 
-    sheep_herder = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': #')
+    username = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': #')
 
-    if sheep_herder == None:
+    if username == None:
         print(w,sheep, 'You can\'t corral any sheep without providing a name for the herder...')
         print(w,sheep, 'If you need some help, just type any valid username on Twitter.')
 
