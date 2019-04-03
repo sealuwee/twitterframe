@@ -1,8 +1,22 @@
 # twitterframe
 
-🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame content from Twitter as a CSV.
+🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame content from Twitter into your preferred format.
 
 In the future, I want to add more flexibility with the preferred output. (i.e. JSON, SQL databases, etc.)
+
+# Project Currently: **ON HOLD**
+
+[Tweepy](https://github.com/tweepy/tweepy/blob/e6616fed65e75bbb93633290eadd5940c41772e7/tweepy/models.py#L73) does not currently have the values from Twitter's API that I would like to use for the purpose of this project.
+
+For example, if you click on the link for tweepy, it should bring you to Line 73 of the ```tweepy/models.py``` script, where the ```class Status(Model):```  and ```@classmethod``` is located. The ```Status``` object (which is just a ```Tweet``` object) from Twitter's API should give you a set of attributes like the following from the [Twitter Developer documentation](https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object).
+
+Unforunately, if we refer back to [tweepy](https://github.com/tweepy/tweepy/blob/e6616fed65e75bbb93633290eadd5940c41772e7/tweepy/models.py#L73), inside of the parse function, we can see that the ```key,value``` pairings do not provide as many ```Tweet``` object attributes as one may like to have. (That one being me.) And so what I am going to be working on in the mean time is a pull request to @tweepy, and add the attributes I want to see from Twitter's API. 
+
+Hopefully all goes well and i'll be able to use tweepy once again, and finish up this command-line-application, but in the mean time, please use my pre-alpha version from the **Installation**.
+
+# Installation and Usage:
+
+- **Coming soon**.
 
 # Progress so far...
 
