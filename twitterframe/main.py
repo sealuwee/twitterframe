@@ -1,6 +1,6 @@
 '''
 All of the commands will be stored here.
-The code will look pretty messy, since we're storing all of the commands in 
+The code will look pretty messy, since we're storing all of the commands in
 this main.py file until we learn how to deploy on Flask.
 '''
 
@@ -38,7 +38,7 @@ def cli():
 
     Documentation coming soon! Along with more commands and options!
     '''
-    pass    
+    pass
 
 @cli.command('setup')
 def setup():
@@ -174,9 +174,7 @@ def scrapelite():
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
-                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
-                         'possibly_sensitive'])
+        writer.writerow(['id', 'created_at', 'text_of_tweet'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()
@@ -185,7 +183,7 @@ def scrapelite():
 @cli.command('scrape')
 def scrape():
     '''
-    Scrape tweets and more with the full scrape function. 
+    DO NOT USE ! Scrape tweets and more with the full scrape function.
     '''
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
@@ -206,14 +204,14 @@ def scrape():
         writer = csv.writer(tw)
         writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
                          'favorite_count', 'favorited', 'retweet_count', 'retweeted',
-                         'possibly_sensitive', 'filter_level', 
+                         'possibly_sensitive', 'filter_level',
                          'entities_hashtags_text', 'entities_urls_expanded_url',
                          'entities_urls_description', 'entities_urls_title',
                          'entities_media_expanded_url', 'entities_media_media_type',
                          'entities_user_mentions_name', 'entities_user_mentions_screen_name',
-                         'entities_user_mentions_id', 'entities_symbols_text', 
+                         'entities_user_mentions_id', 'entities_symbols_text',
                          'user_id', 'user_name', 'user_screen_name', 'user_location',
-                         'user_description', 'user_verified', 'user_protected', 
+                         'user_description', 'user_verified', 'user_protected',
                          'user_followers_count', 'user_friends_count', 'user_listed_count',
                          'user_favourites_count', 'user_statuses_count', 'user_created_at',
                          'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
@@ -248,19 +246,7 @@ def crawl(count):
     with open(out, 'w') as tw:
 
         writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
-                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
-                         'possibly_sensitive', 'filter_level', 
-                         'entities_hashtags_text', 'entities_urls_expanded_url',
-                         'entities_urls_description', 'entities_urls_title',
-                         'entities_media_expanded_url', 'entities_media_media_type',
-                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
-                         'entities_user_mentions_id', 'entities_symbols_text', 
-                         'user_id', 'user_name', 'user_screen_name', 'user_location',
-                         'user_description', 'user_verified', 'user_protected', 
-                         'user_followers_count', 'user_friends_count', 'user_listed_count',
-                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
-                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
+        writer.writerow(['id', 'created_at', 'text_of_tweet'])
         writer.writerows(output_tweets)
 
     out_path = Path(out).resolve()
@@ -293,29 +279,28 @@ def corral():
         writer.writerow(['user_id', 'user_name', 'user_screen_name',
                          'user_location', 'user_created_at', 'user_followers_count',
                          'user_friends_count', 'user_verified', 'user_protected',
-                         'user_statuses_count', 'user_default_profile', 'user_default_profile_image'])
+                         'user_statuses_count'])
 
         writer.writerows(output_followers)
 
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
+# @cli.command('listener')
+# @click.option('--hashtag',
+#               help='Option to track by hashtag.')
+# @click.option('--user',
+#               help='Option ot track by user.')
+# def listener(hashtag,user):
+#     '''
+#     Starts the Stream Listener used with Twitter API.
+#     https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html#
+#     DOES NOT WORK YET.
+#     '''
 
-@cli.command('listener')
-@click.option('--hashtag', 
-              help='Option to track by hashtag.')
-@click.option('--user',
-              help='Option ot track by user.')
-def listener(hashtag,user):
-    '''
-    Starts the Stream Listener used with Twitter API. 
-    https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html#
-    DOES NOT WORK YET.
-    '''
-
-    credentials = reconfigure()
-    api = TwitterWrapper(*credential.values()) 
-    listener = TwitterListener(api=api)
+#     credentials = reconfigure()
+#     api = TwitterWrapper(*credential.values())
+#     listener = TwitterListener(api=api)
 
 
 

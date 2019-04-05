@@ -14,22 +14,22 @@ from . import twitter_methods
 from . import utils
 import tweepy
 import os
-import pathlib as Path 
+import pathlib as Path
 import json
 import csv
 import sqlite3
 
 class StreamListener(tweepy.StreamListener):
 	'''
-		Stream Listener class. 
+		Stream Listener class.
 	'''
 	def __init__(self):
 		super(tweepy.StreamListener, self).__init__()
 
 	def on_status(self, status):
-        print(status.text)
+      print(status.text)
 
-        	def on_error(self, status_code):
+        def on_error(self, status_code):
 
        	 if status_code == 420:
        		return False

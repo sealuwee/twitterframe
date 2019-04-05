@@ -18,7 +18,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
 
     name="twitterframe",
-    version="0.1.9",
+    version="1.0.0",
     author="Ruwai",
     description="A basic command line application used in tandem with Twitter API to frame anything from Twitter into a Pandas DataFrame, or exported as a CSV.",
     long_description=LONG_DESCRIPTION,
@@ -32,7 +32,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Operating System :: OS Independent",
-        "Development Status :: 2 - Pre-Alpha"
+        "Development Status :: 4 - Beta"
     ],
     entry_points='''
         [console_scripts]

@@ -78,7 +78,7 @@ class TwitterWrapper(object):
         '''
         api = self.setup()
 
-        try: 
+        try:
             tweets = []
             user_tweets = tweepy.Cursor(api.user_timeline, id=username,
                                        ).items(limit)
@@ -91,11 +91,13 @@ class TwitterWrapper(object):
                     break
 
                 tweets.append([username, tweet.id_str, tweet.created_at,
-                               tweet.text.encode('utf-8'), tweet.is_quote_status,
-                               tweet.favorite_count, tweet.favorited,
-                               tweet.retweet_count, tweet.retweeted, 
-                               tweet.possibly_sensitive 
+                               tweet.text.encode('utf-8')
                                ])
+                # tweet.is_quote_status,
+                # tweet.is_quote_status,
+                # tweet.favorite_count, tweet.favorited,
+                # tweet.retweet_count, tweet.retweeted,
+                # tweet.possibly_sensitive
 
             print(pidgeon, 'Downloaded {} tweets from user: {}'.format(len(tweets), username))
 
@@ -105,26 +107,24 @@ class TwitterWrapper(object):
         except tweepy.error.RateLimitError as twrle:
             print(w, "Reached Twitter rate limit. Ending loop.")
             print(w, twrle)
- 
+
         return tweets
 
     def get_status_objects(self, username):
         '''
-        Highly recommended to use this if you want to pull ALL objects, 
+        Highly recommended to use this if you want to pull ALL objects,
         including entities.
         '''
         api = self.setup()
 
-        try: 
+        try:
             tweets = []
             statuses = tweepy.Cursor(api.user_statuses, id=username,
                                      include_entites=True).items()
-            p_bar = tqdm(user_tweets, ascii=False, desc='Harvesting Data from user: {}'.format(username))
+            p_bar = tqdm(statuses, ascii=False, desc='Harvesting Data from user: {}'.format(username))
 
             for i, tweet in enumerate(p_bar):
                 p_bar.update(1)
-                if i > limit:
-                    break
 
                 tweets.append([username, tweet.id_str, tweet.create_at, tweet.text.encode('utf-8'),
                                tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
@@ -133,9 +133,9 @@ class TwitterWrapper(object):
                                tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
                                tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8'),
                                tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
-                               tweet.user.location, tweet.user.description, 
-                               tweet.user.verified, tweet.user.protected, 
-                               tweet.user.followers_count, tweet.user.friends_count, 
+                               tweet.user.location, tweet.user.description,
+                               tweet.user.verified, tweet.user.protected,
+                               tweet.user.followers_count, tweet.user.friends_count,
                                tweet.user.listed_count, tweet.user.favourites_count,
                                tweet.user.statuses_count, tweet.user.created_at,
                                tweet.user.geo_enabled, tweet.user.default_profile,
@@ -171,7 +171,7 @@ class TwitterWrapper(object):
                                        ).items(limit)
 
             print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
-            
+
             p_bar = tqdm(hashtag_tweets, ascii=False, total=limit, desc='Harvesting Tweets from hashtag: {}'.format(hashtag),
                          unit=' tweets')
 
@@ -181,22 +181,7 @@ class TwitterWrapper(object):
                     break
 
                 tweets.append([ hashtag, tweet.id_str, tweet.created_at,
-                                tweet.text.encode('utf-8'), tweet.is_quote_status, 
-                                tweet.quoted_status, tweet.favorite_count, tweet.favorited,
-                                tweet.retweet_count, tweet.retweeted, tweet.retweeted_status, 
-                                tweet.possibly_sensitive, tweet.entities.hashtags.text.encode('utf-8'), tweet.entities.urls.expanded_url,
-                                tweet.entities.urls.description, tweet.entities.urls.title,
-                                tweet.entities.media.expanded_url, tweet.entities.media.media_type,
-                                tweet.entities.user_mentions.name, tweet.entities.user_mentions.screen_name,
-                                tweet.entities.user_mentions.id_str, tweet.entities.symbols.text.encode('utf-8'),
-                                tweet.user.id_str, tweet.user.name, tweet.user.screen_name,
-                                tweet.user.location, tweet.user.description, 
-                                tweet.user.verified, tweet.user.protected, 
-                                tweet.user.followers_count, tweet.user.friends_count, 
-                                tweet.user.listed_count, tweet.user.favourites_count,
-                                tweet.user.statuses_count, tweet.user.created_at,
-                                tweet.user.geo_enabled, tweet.user.default_profile,
-                                tweet.user.default_profile_image 
+                                tweet.text.encode('utf-8')
                                ])
 
             print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
@@ -236,8 +221,7 @@ class TwitterWrapper(object):
                 followers.append([follower.user.id_str, follower.user.name, follower.user.screen_name,
                                 follower.user.location, follower.user.created_at, follower.user.followers_count,
                                 follower.user.friends_count, follower.user.verified, follower.user.protected,
-                                follower.user.statuses_count, follower.user.default_profile, 
-                                follower.user.default_profile_image])
+                                follower.user.statuses_count])
 
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
