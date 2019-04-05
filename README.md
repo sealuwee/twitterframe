@@ -76,6 +76,7 @@ Mac saved the project. Shoutout to @macscheffer
 ### Contributors with 💚
 
 🏆 @colejhudson
+
 🏆 @macscheffer
 
 ### Contact

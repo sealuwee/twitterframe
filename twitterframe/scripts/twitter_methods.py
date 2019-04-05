@@ -82,7 +82,8 @@ class TwitterWrapper(object):
 
         try:
             tweets = []
-            user_tweets = tweepy.Cursor(api.user_timeline, id=username,
+            user_tweets = tweepy.Cursor(api.user_timeline,
+                                        id=username
                                        ).items()
             p_bar = tqdm(user_tweets, ascii=False, desc='Harvesting Tweets from user: {}'.format(username),
                          unit=' tweets')
@@ -180,8 +181,8 @@ class TwitterWrapper(object):
                 if count > limit:
                     break
 
-                tweets.append([ hashtag, tweet.id_str, tweet.created_at,
-                                tweet.text.encode('utf-8')
+                tweets.append([hashtag, tweet.id_str, tweet.created_at,
+                               tweet.text.encode('utf-8')
                                ])
 
             print(pidgeon, '{} Downloaded tweets, with the hashtag {} !'.format(len(tweets),hashtag))
@@ -218,7 +219,8 @@ class TwitterWrapper(object):
 
                 p_bar.update(1)
 
-                followers.append([follower.user.id_str, follower.user.name, follower.user.screen_name,
+                followers.append([
+                                follower.user.id_str, follower.user.name, follower.user.screen_name,
                                 follower.user.location, follower.user.created_at, follower.user.followers_count,
                                 follower.user.friends_count, follower.user.verified, follower.user.protected,
                                 follower.user.statuses_count])
