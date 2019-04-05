@@ -1,5 +1,7 @@
 '''
 twitter-trends.py : uh
+
+ADD ._json TO EVERYTHING... LMAO
 '''
 #
 
@@ -71,7 +73,7 @@ class TwitterWrapper(object):
         '''
         return [tweet.text for tweet in self.setup().home_timeline()]
 
-    def get_user_tweets(self, username, limit=50000):
+    def get_user_tweets(self, username):
         '''
            Get tweets by username with the tweepy.API method --> user_timeline.
            This works.
@@ -81,14 +83,12 @@ class TwitterWrapper(object):
         try:
             tweets = []
             user_tweets = tweepy.Cursor(api.user_timeline, id=username,
-                                       ).items(limit)
-            p_bar = tqdm(user_tweets, ascii=False, total=limit, desc='Harvesting Tweets from user: {}'.format(username),
+                                       ).items()
+            p_bar = tqdm(user_tweets, ascii=False, desc='Harvesting Tweets from user: {}'.format(username),
                          unit=' tweets')
 
             for i, tweet in enumerate(p_bar):
                 p_bar.update(1)
-                if i > limit:
-                    break
 
                 tweets.append([username, tweet.id_str, tweet.created_at,
                                tweet.text.encode('utf-8')
@@ -168,11 +168,11 @@ class TwitterWrapper(object):
                                        rpp=count, result_type='recent',
                                        include_entities=True,
                                        lang='en',
-                                       ).items(limit)
+                                       ).items()
 
             print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
 
-            p_bar = tqdm(hashtag_tweets, ascii=False, total=limit, desc='Harvesting Tweets from hashtag: {}'.format(hashtag),
+            p_bar = tqdm(hashtag_tweets, ascii=False, desc='Harvesting Tweets from hashtag: {}'.format(hashtag),
                          unit=' tweets')
 
             for count, tweet in hashtag_tweets:
