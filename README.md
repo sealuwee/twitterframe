@@ -30,6 +30,10 @@ Mac saved the project. Shoutout to @macscheffer
 
 🔜 ```crawl``` command will require a mandatory argument for how many tweets to get per request, and the rate limit for the TwitterAPI is reached, an exception is passed.
 
+🔜 ```listener``` will be a group of subcommands that will either start or stop the twitter streamer.
+
+🔜 **Shell environment**. Instead of it just being a command-line-application where we invoke twitterframe, I would like to just invoke twitterframe to build out a shell environment to do all of these cool twitter things.
+
 🔜 Add functionality for a StreamListener class that will listen for live tweets and bin based on sentiment.
 
 🔜 Decorate the command line application with more colors

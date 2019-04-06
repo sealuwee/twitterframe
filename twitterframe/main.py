@@ -5,6 +5,7 @@ this main.py file until we learn how to deploy on Flask.
 '''
 
 from .scripts.twitter_methods import TwitterWrapper
+from .scripts.twitter_listener import TwitterListener
 from .scripts import utils
 import click
 import os
@@ -35,6 +36,8 @@ def cli():
     packaged nicely into a command line application at the user's convenience.
     Please use this application to your liking, and leave any comments or issues
     in a pull request on GitHub.
+
+    Streaming is currently in development!
 
     Documentation coming soon! Along with more commands and options!
     '''

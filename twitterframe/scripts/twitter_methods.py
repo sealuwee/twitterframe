@@ -11,7 +11,6 @@ import json
 import csv
 import os
 from pathlib import Path
-import logging
 import time
 from tqdm import tqdm
 
