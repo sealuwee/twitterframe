@@ -41,6 +41,7 @@ class TwitterWrapper(object):
                  access_secret,
                  consumer_key,
                  consumer_secret):
+
         self.access_token = access_token
         self.access_secret = access_secret
         self.consumer_key = consumer_key
@@ -166,10 +167,10 @@ class TwitterWrapper(object):
         try:
             tweets = []
             hashtag_tweets = tweepy.Cursor(api.search, q=hashtag,
-                                       rpp=count, result_type='recent',
-                                       include_entities=True,
-                                       lang='en',
-                                       ).items()
+                                           rpp=count, result_type='recent',
+                                           include_entities=True,
+                                           lang='en',
+                                           ).items()
 
             print(h, 'Collecting tweets from #{}'.format(hashtag), pidgeon)
 
