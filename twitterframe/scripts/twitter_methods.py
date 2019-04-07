@@ -14,6 +14,7 @@ from pathlib import Path
 import time
 from tqdm import tqdm
 import psychopg2
+import crayons
 
 h = utils.hatching_chick
 b = utils.baby_chick

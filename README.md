@@ -1,8 +1,8 @@
 # twitterframe
 
-🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to frame content from Twitter into your preferred format.
+🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to create .csv files.
 
-In the future, I want to add more flexibility with the preferred output. (i.e. JSON, SQL databases, etc.)
+In the future this project will have an interactive shell that will feature creating, connecting and committing to a database.
 
 # Project Currently: **BETA**
 
@@ -33,6 +33,8 @@ Mac saved the project. Shoutout to @macscheffer
 🔜 ```listener``` will be a group of subcommands that will either start or stop the twitter streamer.
 
 🔜 **Shell environment**. Instead of it just being a command-line-application where we invoke twitterframe, I would like to just invoke twitterframe to build out a shell environment to do all of these cool twitter things.
+
+🔜 In the true working version of this project, I definitely want to have the shell environment up and running.
 
 🔜 The goal is to honestly make it into a really comfortable shell environment for commands and managing databases.
 

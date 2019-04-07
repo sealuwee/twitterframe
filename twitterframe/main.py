@@ -14,6 +14,7 @@ import json
 import csv
 import time
 import psychopg2
+import crayons
 
 # global variables
 # emojis go here

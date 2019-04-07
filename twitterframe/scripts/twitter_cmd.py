@@ -8,6 +8,7 @@ from pathlib import Path
 import time
 from tqdm import tqdm
 import psychopg2
+import crayons
 
 class TwitterFrame(Cmd):
     '''
