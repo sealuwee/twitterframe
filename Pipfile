@@ -10,6 +10,7 @@ pandas = "*"
 tweepy = "*"
 click = "*"
 python-dotenv = "*"
+psychopg2 = "*"
 
 [requires]
 python_version = "3.7"

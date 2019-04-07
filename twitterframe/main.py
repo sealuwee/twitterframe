@@ -13,6 +13,7 @@ from pathlib import Path
 import json
 import csv
 import time
+import psychopg2
 
 # global variables
 # emojis go here
@@ -183,45 +184,45 @@ def scrapelite():
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
-@cli.command('scrape')
-def scrape():
-    '''
-    DO NOT USE ! Scrape tweets and more with the full scrape function.
-    '''
-    credentials = reconfigure()
-    api = TwitterWrapper(*credentials.values())
+# @cli.command('scrape')
+# def scrape():
+#     '''
+#     DO NOT USE ! Scrape tweets and more with the full scrape function.
+#     '''
+#     credentials = reconfigure()
+#     api = TwitterWrapper(*credentials.values())
 
-    username = click.prompt(egg, 'Input Username ', prompt_suffix=': @')
+#     username = click.prompt(egg, 'Input Username ', prompt_suffix=': @')
 
-    if username == None:
-        print(w*3,'Must specify a username from twitter.com')
-        return
+#     if username == None:
+#         print(w*3,'Must specify a username from twitter.com')
+#         return
 
-    print(check, 'Beginning to scrape user: {}'.format(username))
-    output_tweets = api.get_status_objects(username)
-    time.sleep(1)
-    out = '{}_tweets.csv'.format(username)
+#     print(check, 'Beginning to scrape user: {}'.format(username))
+#     output_tweets = api.get_status_objects(username)
+#     time.sleep(1)
+#     out = '{}_tweets.csv'.format(username)
 
-    with open(out, 'w') as tw:
+#     with open(out, 'w') as tw:
 
-        writer = csv.writer(tw)
-        writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
-                         'favorite_count', 'favorited', 'retweet_count', 'retweeted',
-                         'possibly_sensitive', 'filter_level',
-                         'entities_hashtags_text', 'entities_urls_expanded_url',
-                         'entities_urls_description', 'entities_urls_title',
-                         'entities_media_expanded_url', 'entities_media_media_type',
-                         'entities_user_mentions_name', 'entities_user_mentions_screen_name',
-                         'entities_user_mentions_id', 'entities_symbols_text',
-                         'user_id', 'user_name', 'user_screen_name', 'user_location',
-                         'user_description', 'user_verified', 'user_protected',
-                         'user_followers_count', 'user_friends_count', 'user_listed_count',
-                         'user_favourites_count', 'user_statuses_count', 'user_created_at',
-                         'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
-        writer.writerows(output_tweets)
+#         writer = csv.writer(tw)
+#         writer.writerow(['id', 'created_at', 'text_of_tweet', 'is_quote',
+#                          'favorite_count', 'favorited', 'retweet_count', 'retweeted',
+#                          'possibly_sensitive', 'filter_level',
+#                          'entities_hashtags_text', 'entities_urls_expanded_url',
+#                          'entities_urls_description', 'entities_urls_title',
+#                          'entities_media_expanded_url', 'entities_media_media_type',
+#                          'entities_user_mentions_name', 'entities_user_mentions_screen_name',
+#                          'entities_user_mentions_id', 'entities_symbols_text',
+#                          'user_id', 'user_name', 'user_screen_name', 'user_location',
+#                          'user_description', 'user_verified', 'user_protected',
+#                          'user_followers_count', 'user_friends_count', 'user_listed_count',
+#                          'user_favourites_count', 'user_statuses_count', 'user_created_at',
+#                          'user_geo_enabled', 'user_default_profile', 'user_default_profile_image'])
+#         writer.writerows(output_tweets)
 
-    out_path = Path(out).resolve()
-    print(pidgeon, check, 'CSV created at {}'.format(out_path))
+#     out_path = Path(out).resolve()
+#     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 @cli.command('crawl')
 @click.argument('count', default=int(100), required=False)
@@ -266,7 +267,7 @@ def corral():
     credentials = reconfigure()
     api = TwitterWrapper(*credentials.values())
 
-    username = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': #')
+    username = click.prompt(sheep*3, 'Whose sheep would you like to corral? ', prompt_suffix=': @')
 
     if username == None:
         print(w,sheep, 'You can\'t corral any sheep without providing a name for the herder...')
@@ -280,9 +281,7 @@ def corral():
 
         writer = csv.writer(tw)
         writer.writerow(['user_id', 'user_name', 'user_screen_name',
-                         'user_location', 'user_created_at', 'user_followers_count',
-                         'user_friends_count', 'user_verified', 'user_protected',
-                         'user_statuses_count'])
+                         ])
 
         writer.writerows(output_followers)
 

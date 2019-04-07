@@ -34,6 +34,10 @@ Mac saved the project. Shoutout to @macscheffer
 
 🔜 **Shell environment**. Instead of it just being a command-line-application where we invoke twitterframe, I would like to just invoke twitterframe to build out a shell environment to do all of these cool twitter things.
 
+🔜 The goal is to honestly make it into a really comfortable shell environment for commands and managing databases.
+
+🔜 This is starting to get less simple... lol
+
 🔜 Add functionality for a StreamListener class that will listen for live tweets and bin based on sentiment.
 
 🔜 Decorate the command line application with more colors

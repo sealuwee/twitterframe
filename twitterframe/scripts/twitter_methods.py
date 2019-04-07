@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
+import psychopg2
 
 h = utils.hatching_chick
 b = utils.baby_chick
@@ -64,8 +65,8 @@ class TwitterWrapper(object):
             print(check, 'Credentials have been verified!')
             print(pidgeon, 'Enjoy using twitterframe.')
 
-        except:
-            print(w*3, 'Credentials are not valid.')
+        except tweepy.error.TweepError as twerp:
+            print(w,twerp)
 
     def get_timeline(self):
         '''
@@ -221,9 +222,10 @@ class TwitterWrapper(object):
 
                 followers.append([
                                 follower.user.id_str, follower.user.name, follower.user.screen_name,
-                                follower.user.location, follower.user.created_at, follower.user.followers_count,
-                                follower.user.friends_count, follower.user.verified, follower.user.protected,
-                                follower.user.statuses_count])
+                                # follower.user.location, follower.user.created_at, follower.user.followers_count,
+                                # follower.user.friends_count, follower.user.verified, follower.user.protected,
+                                # follower.user.statuses_count
+                                ])
 
         except tweepy.error.TweepError as twerp:
             print(w,twerp)
