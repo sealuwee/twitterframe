@@ -12,6 +12,7 @@ click = "*"
 python-dotenv = "*"
 psychopg2 = "*"
 crayons = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"

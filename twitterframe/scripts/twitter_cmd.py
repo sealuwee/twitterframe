@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import time
 from tqdm import tqdm
-import psychopg2
+import psychopg2 as pg
 import crayons
 
 class TwitterFrame(Cmd):
