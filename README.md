@@ -4,9 +4,9 @@
 
 In the future this project will have an interactive shell that will feature creating, connecting and committing to a database.
 
-# Project Currently: **BETA**
+# Project Currently: **ON HOLD**
 
-Mac saved the project. Shoutout to @macscheffer
+- somewhat functional, use at your own expense or make a pull request to improve on it if you wish!
 
 # Installation and Usage:
 
@@ -30,7 +30,7 @@ Mac saved the project. Shoutout to @macscheffer
 
 🔜 ```crawl``` command will require a mandatory argument for how many tweets to get per request, and the rate limit for the TwitterAPI is reached, an exception is passed.
 
-🔜 ```listener``` will be a group of subcommands that will either start or stop the twitter streamer.
+✅ ```listener``` will be a group of subcommands that will either start or stop the twitter streamer.
 
 🔜 **Shell environment**. Instead of it just being a command-line-application where we invoke twitterframe, I would like to just invoke twitterframe to build out a shell environment to do all of these cool twitter things.
 
@@ -67,21 +67,6 @@ Mac saved the project. Shoutout to @macscheffer
 
 ❗️ ```crawl``` command is not pulling tweets by the specified times.
 
-❗️ ```crawl``` gets a Twitter error response: status code = 429 due to the application's rate limit on the amount of requests to be served.
-
-❗️ ```listener``` does not do anything. Yeah I know, big issue here.
-
-❗️ Some exceptions are not working apprropriately.
-
-❗️ Honestly there are so many known issues at this point LOL
-
-❗️ ```tweepy``` does not have enough attributes in the class methods to my liking.
-
-❗️ Going to learn some more object oriented programming and classmethod related stuff, so that I can either A) build a new tweepy or B) add more funcitonality to the next version of tweepy.
-
-❗️ Streaming does not work.
-
-❗️ RateLimitError is not being raised even if intentional.
 
 ### Contributors with 💚
 
