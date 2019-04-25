@@ -306,7 +306,7 @@ def listener(hashtag,user):
         print(w, 'Must enter a twitter username.')
 
     output = listener.start_streaming(username)
-
+    output = listener.stop_streaming()
     time.sleep(1)
     out = '{}_stream.csv'.format(username)
 
