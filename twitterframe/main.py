@@ -151,11 +151,6 @@ def verify():
     api.verify_creds()
 
 @cli.command('scrapelite')
-# @click.option('--user', default='',
-#               help='Specify a user to scrape.')
-# @click.option('--out', default='tweets.csv',
-#               help='Specify filename for csv.')
-# @click.argument('username', required=True)
 def scrapelite():
     '''
     Scrape tweets from a specified user and dump into a .csv file.
@@ -273,6 +268,7 @@ def corral():
     if username == None:
         print(w,sheep, 'You can\'t corral any sheep without providing a name for the herder...')
         print(w,sheep, 'If you need some help, just type any valid username on Twitter.')
+        return
 
     output_followers = api.get_followers(username)
     time.sleep(1)
@@ -289,22 +285,40 @@ def corral():
     out_path = Path(out).resolve()
     print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
-# @cli.command('listener')
-# @click.option('--hashtag',
-#               help='Option to track by hashtag.')
-# @click.option('--user',
-#               help='Option ot track by user.')
-# def listener(hashtag,user):
-#     '''
-#     Starts the Stream Listener used with Twitter API.
-#     https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html#
-#     DOES NOT WORK YET.
-#     '''
+@cli.command('listener')
+@click.option('--hashtag',
+              help='Option to track by hashtag.')
+@click.option('--user',
+              help='Option ot track by user.')
+def listener(hashtag,user):
+    '''
+    Starts the Stream Listener used with Twitter API.
+    https://developer.twitter.com/en/docs/tutorials/consuming-streaming-data.html#
+    '''
 
-#     credentials = reconfigure()
-#     api = TwitterWrapper(*credential.values())
-#     listener = TwitterListener(api=api)
+    credentials = reconfigure()
+    api = TwitterWrapper(*credential.values())
+    listener = TwitterListener(api=api)
 
+    username = click.prompt(sheep*3, 'Who would you like to stream tweets from? ', prompt_suffix=': @')
 
+    if username == None:
+        print(w, 'Must enter a twitter username.')
+
+    output = listener.start_streaming(username)
+
+    time.sleep(1)
+    out = '{}_stream.csv'.format(username)
+
+    with open(out, 'w') as tw:
+
+        writer = csv.writer(tw)
+        writer.writerow(['id', 'created_at', 'text_of_tweet'
+                         ])
+
+        writer.writerows(output)
+
+    out_path = Path(out).resolve()
+    print(pidgeon, check, 'CSV created at {}'.format(out_path))
 
 

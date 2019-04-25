@@ -19,5 +19,38 @@ import crayons
 import SQLAlchemy
 from SQLAlchemy import create_engine
 
+class TwitterDB:
+    '''
+      DB Class
+    '''
+    def __init__(self,
+                 access_token,
+                 access_secret,
+                 consumer_key,
+                 consumer_secret,
+                 dbname,
+                 user,
+                 password,
+                 host,
+                 port):
+        self.access_token = access_token
+        self.access_secret = access_secret
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.dbname = dbname
+        self.user = user
+        self.password = password
+        self.host = host
+        self.port = port
 
+    def setup(self):
+        '''
+          setup method from twitter_methods
+        '''
+        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth.set_access_token(self.access_token, self.access_secret)
+
+        api = tweepy.API(auth)
+
+        return api
 
