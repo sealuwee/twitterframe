@@ -2,11 +2,15 @@
 
 🥚🔜🐦 twiterframe. A basic command line application used in tandem with Twitter API to create .csv files.
 
-In the future this project will have an interactive shell that will feature creating, connecting and committing to a database.
+In the future this project will have an interactive shell that will feature creating, connecting and committing tweets in tabular format to a database.
 
-# Project Currently: **ON HOLD**
+# Project Status: Slowly getting back into it
 
-- somewhat functional, use at your own expense or make a pull request to improve on it if you wish!
+**UPDATE (08/25/2019)** :
+
+- This was one of my first ever python projects that took into account using Twitter's free API
+- I'll also be updating this README and make it cleaner, or archive the messy README with a cleaner README lol
+- TLDR Found some small motivation to finish this up
 
 # Installation and Usage:
 
