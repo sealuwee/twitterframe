@@ -29,16 +29,31 @@ sheep = bytes.decode(b'\xF0\x9F\x90\x91', 'utf-8')
 # Paths
 config_path = Path(os.environ['HOME']+'/.twitterframe')
 
+def reconfigure():
+    '''
+    reconfig: opens path to config where keys are stored.
+    '''
+    print(egg, 'Checking credentials for API...', egg)
+
+    home = Path(config_path)
+    if not home.exists():
+        print(w*3, 'Credentials file does not exist.', w*3)
+        return {}
+
+    with open(config_path) as creds:
+        credentials = json.loads(creds.read())
+
+    print(b, 'Credentials are good to go!', b)
+    return credentials
+
 def basic_color(code):
     '''
         16 colors supported here.
     '''
-
     def inner(text, rl=False):
         '''
             Code from github.com/orakaro/rainbowstream
         '''
-
         c = code
 
         if rl:

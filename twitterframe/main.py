@@ -7,6 +7,7 @@ this main.py file until we learn how to deploy on Flask.
 from .scripts.twitter_methods import TwitterWrapper
 from .scripts.twitter_listener import TwitterListener
 from .scripts import utils
+from .scripts.utls import reconfigure, basic_color, term_color
 import click
 import os
 from pathlib import Path
