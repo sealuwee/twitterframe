@@ -19,7 +19,7 @@ import crayons
 import SQLAlchemy
 from SQLAlchemy import create_engine
 
-class TwitterDB:
+class TwitterDB(object):
     '''
       DB Class
     '''

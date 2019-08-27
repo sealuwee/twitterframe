@@ -27,7 +27,6 @@ w = utils.warning
 check = utils.checkmark
 egg = utils.egg
 sheep = utils.sheep
-
 config_path = utils.config_path
 
 @click.group()
